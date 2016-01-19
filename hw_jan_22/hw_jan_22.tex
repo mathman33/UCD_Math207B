@@ -259,6 +259,23 @@ Thus $u_+(x) = 2\sin(\pi x)$ and $u_-(x) = -2\sin(\pi x)$ minimize $J(u)$ subjec
     K(v) = \int_c^d G(t, v, v')\dd t
 \end{align*}
 \textit{and express $G$ in terms of $F$ and $\phi$.\\
-(b) Show that the Euler-Lagrange equation for $K(v)$ is the same as what you get by changing variables in the Euler-Lagrange equation for $J(u)$.}
+(b) Show that the Euler-Lagrange equation for $K(v)$ is the same as what you get by changing variables in the Euler-Lagrange equation for $J(u)$.} \\
+
+Let $x = \phi(t)$ and $v(t) = u(\phi(t))$ where $\phi'(t) > 0$.  Then note, by the chain rule, $\dd x = \phi'(t) \dd t$ and $v'(t) = u_\phi \phi'(t)$.  Thus, $x = a \implies t = c = \phi^{-1}(a)$ and $x = b \implies t = d = \phi^{-1}(b)$.  Also,
+\begin{align*}
+    F(x, u, u') = F\qty(\phi(t), v(t), \frac{v'(t)}{\phi'(t)})
+\end{align*}
+So let $G(t, v, v') = \phi'(t)F\qty(\phi(t), v(t) \frac{v'(t)}{\phi'(t)})$.  Then
+\begin{align*}
+    J(u) = \int_a^b F(x, u, u') = \int_c^d G(t, v, v')\dd t = K(v)
+\end{align*}
+Also,
+\begin{align*}
+    -\frac{\dd}{\dd x}F_{u'} + F_u &= 0 \\
+    \implies -\frac{1}{\phi'}\frac{\dd}{\dd t}F_{\frac{v'}{\phi'}}\qty(\phi, v, \frac{v'}{\phi'}) + F_v\qty(\phi, v, \frac{v'}{\phi'}) &= 0 \\
+    \implies -\frac{1}{\phi'}\frac{\dd}{\dd t}G_{v'} + \frac{1}{\phi'}G_v &= 0 \\
+    \implies -\frac{\dd}{\dd t}G_{v'} + G_v &= 0
+\end{align*}
+since $\phi' > 0$.
 
 \end{document}
