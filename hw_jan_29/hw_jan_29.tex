@@ -1,0 +1,226 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb, amsmath, amsfonts}
+\usepackage{moreverb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{array}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage[makeroom]{cancel}
+\usepackage{bbold}
+\usepackage{alltt}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\usepackage{bigints}
+\allowdisplaybreaks
+\pgfplotsset{compat=1.12}
+
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}{Lemma}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\E}{\varepsilon}
+
+\title{\bf HW \#2}
+\author{\bf Sam Fleischer}
+\date{\bf January 29, 2015}
+
+\pgfplotsset{compat=1.12}
+
+\begin{document}
+\textbf{MATH 207B \hfill Applied Math \ \ \hfill Winter 2016\ \ \ }
+
+{\let\newpage\relax\maketitle}
+
+\section*{Problem 1}
+\emph{A particle of mass $m$ with position $\vec{x}(t)$ at time $t$ has potential energy $V(\vec{x})$ and kinetic energy $$T = \frac{1}{2}m|\vec{x}_t|^2.$$  The action of the particle over times $t_0 \leq t \leq t_1$ is the time-integral of the difference between the kinetic and potential energy: $$S(\vec{x}) = \int_{t_0}^{t_1}(T - V)\dd t.$$}
+
+\begin{enumerate}[(a)]
+    \item \emph{Show that an extremal $\vec{x}(t)$ of $S$ satisfies Newton's second law $\vec{F} = m\vec{a}$ for motion in a conservative force field $\vec{F} = -\nabla V$.} \\
+
+    Let $\vec{\phi}$ be a perturbation such that $\vec{\phi}(t_0) = \vec{\phi}(t_1) = 0$.  Then consider
+    \begin{align*}
+        0 = \frac{\dd}{\dd \E}(S(\vec{x} + \E\vec{\phi}))\Bigg|_{\E= 0} &= \frac{\dd}{\dd \E}\int_{t_0}^{t_1} \left\{\frac{1}{2}m|\vec{x}_t + \E\vec{\phi}_t|^2 - V(\vec{x} + \E\vec{\phi})\right\}\dd t\Bigg|_{\E= 0} \\
+        &= \int_{t_0}^{t_1}\left\{m|\vec{x}_t + \E\vec{\phi}_t|\vec{\phi}_t - \vec{\phi}\nabla V(\vec{x} + \E\vec{\phi}) \dd t\right\}\dd t \Bigg|_{\E= 0} \\
+        &= \int_{t_0}^{t_1} \vec{\phi}_t m|\vec{x}_t| - \vec{\phi}\nabla V(\vec{x})\dd t \\
+        &= \int_{t_0}^{t_1}-\vec{\phi}\nabla V(\vec{x})\dd t + \cancelto{0}{\qty[\vec{\phi} m |\vec{x}_y|]_{t_0}^{t_1}} - \int_{t_0}^{t_1}\vec{\phi} m|\vec{x}_{tt}|\dd t \\
+        &= \int_{t_0}^{t_1}\vec{\phi}\qty[-\nabla V - m|\vec{a}|]\dd t \\
+    \end{align*}
+    Since this holds for any perturbation $\vec{\phi}$, then by the Fundamental Theorem of Calculus of Variations, this shows
+    \begin{align*}
+        -\nabla V - m|\vec{a}| = 0 \\
+        \implies F = -\nabla V = m|\vec{a}|
+    \end{align*}
+    \item \emph{Show that the total energy of the particle $E = T + V$ is a constant independent of time.} \\
+    
+    We will show the time derivative of $E = T + V$ is zero:
+    \begin{align*}
+        \frac{\dd}{\dd t} \qty[T + V] &= \frac{\dd}{\dd t}T + \frac{\dd}{\dd t}V \\
+        &= m|\vec{x}_{tt}| + \nabla V \\
+        &= m|\vec{a}| - F \\
+        &= 0
+    \end{align*}
+    Thus the total energy $E$ is time-independent.
+\end{enumerate}
+
+\section*{Problem 2}
+\emph{Let $\Omega \subset \mathbb{R}^n$ be a bounded region with smooth boundary (so the divergence theorem holds) and $f\ :\ \overline{\Omega} \rightarrow \mathbb{R}$ a smooth function.  Derive the Euler-Lagrange equation and natural boundary condition that are satisfied by a smooth extremal $u\ :\ \overline{\Omega} \rightarrow \mathbb{R}$ of the functional $$J(u) = \int_\Omega\qty(\frac{1}{2}|\nabla u|^2 - fu) \dd x.$$} \\
+
+Let $\phi$ be a perturbation of $u$.  Then
+\begin{align*}
+    0 = \frac{\dd}{\dd \E}J(u + \E\phi)\Bigg|_{\E= 0} &= \frac{\dd}{\dd \E}\int_\Omega\qty(\frac{1}{2}|\nabla (u + \E\phi)|^2 - f(u + \E\phi))\dd x \Bigg|_{\E= 0} \\
+    &= \int_\Omega \qty(\nabla (u + \E\phi) \nabla \phi - f \phi) \dd x \Bigg|_{\E= 0} \\
+    &= \int_\Omega \qty(\nabla u \nabla \phi - f \phi) \dd x \\
+    &= \int_{\partial\Omega}\phi\nabla u \cdot n \dd s - \int_\Omega \phi \Delta u \dd x - \int_\Omega f \phi \dd x \\
+    &= \int_{\partial\Omega}\phi\frac{\dd u}{\dd n}\dd s - \int_{\Omega} \phi\qty(\Delta u + f)\dd x
+\end{align*}
+So the natural boundary conditions are the Neumann boundary conditions:
+\begin{align*}
+    \frac{\dd u}{\dd n} = 0\ \ \ \ \ \text{ for } x \in \partial \Omega
+\end{align*}
+and since $\phi$ is an arbitrary perturbation, then
+\begin{align*}
+    f = -\Delta u\ \ \ \ \ \text{ for } x \in \Omega
+\end{align*}
+
+\section*{Problem 3}
+\emph{The transverse displacement at position $x$ and time $t$ of an elastic string vibrating in the $(x,y)$-plane is given by $y = u(x,t)$, where $a \leq x \leq b$ and $t_0 \leq t \leq t_1$.  If the density of the string per unit length is $\rho(x)$ and the tension in the string is a constant $T$, then (for small displacements) the motion of the string is an extremum of the action $$S(u) = \int_{t_0}^{t_1}\int_a^b \qty(\frac{1}{2}\rho u_t^2 - \frac{1}{2}T u_x^2)\dd x \dd t.$$  Derive the Euler-Lagrange equation for $u(x,t)$.} \\
+
+Let $\phi$ be a perturbation of $u$.  Then
+\begin{align*}
+    0 = \frac{\dd}{\dd \E}S(u + \E\phi)\Bigg|_{\E = 0} &= \frac{\dd}{\dd \E}\int_{t_0}^{t_1}\int_a^b \qty(\frac{1}{2}\rho (u + \E\phi)_t^2 - \frac{1}{2}T (u + \E\phi)_x^2)\dd x \dd t \Bigg|_{\E = 0} \\
+    &= \int_{t_0}^{t_1} \int_a^b \qty(\rho(u + \E \phi)_t\phi_t - T(u + \E \phi)_x \phi_x) \dd x \dd t\Bigg|_{\E = 0} \\
+    &= \int_{t_0}^{t_1}\int_a^b \qty(\rho u_t \phi_t - T u_x \phi_x) \dd x \dd t \\
+    &= \int_{t_0}^{t_1}\int_a^b \rho u_t \phi_t \dd x \dd t - \int_{t_0}^{t_1} \int_a^b T u_x \phi_x \dd x \dd t \\
+    &= \int_a^b \rho \int_{t_0}^{t_1} u_t \phi_t \dd t \dd x - T \int_{t_0}^{t_1}\int_a^b u_x \phi_x \dd x \dd t
+\end{align*}
+We can use integration by parts for each inner-integral to get
+\begin{align*}
+    0 &= \int_a^b \rho \qty[u_t\phi\Big|_{t_0}^{t_1} - \int_{t_0}^{t_1}\phi u_{tt} \dd t] \dd x - T\int_{t_0}^{t_1}\qty[u_x\phi\Big|_a^b - \int_a^b \phi u_{xx} \dd x]\dd t \\
+    &= \int_{t_0}^{t_1}\int_a^b \phi\qty[\rho u_{tt} + T u_{xx}]\dd x \dd t - \int_a^b \rho \qty[-u_t(t_0, x)\phi(t_0, x) - u_t(t_1, x)\phi(t_1, x)]\dd x \\
+    &\ \ \ \ \ \ \ \ \ \ \ \ \ - T\int_{t_0}^{t_1}\qty[u_x(t, a)\phi(t, a) - u_x(t, b)\phi(t, b)]\dd t
+\end{align*}
+Since there is constant tension, let us assume the endpoints of the string are held constant.  In other words, the perturbation is nill at the endpoints:
+\begin{align*}
+    \phi(t, a) = \phi(t, b) = 0\ \ \ \ \forall t \in [t_0, t_1]
+\end{align*}
+Let us also assume the perturbation only lasts in the time interval $[t_0, t_1]$.  In other words, before $t_0$ and after $t_1$ there is no perturbation:
+\begin{align*}
+    \phi(t_0, x) = \phi(t_1, x) = 0\ \ \ \ \forall x \in [a, b]
+\end{align*}
+These are the Dirichlet boundary conditions on the rectangle $[t_0, t_1] \times [a, b] \subset \mathbb{R}^2$.  Thus,
+\begin{align*}
+    0 = \int_{t_0}^{t_1} \int_a^b \phi\qty[-\rho u_{tt} + T u_{xx}] \dd x \dd t
+\end{align*}
+Since this holds for all perturbations $\phi$, then by the Fundamental Theorem of Calculus of Variations,
+\begin{align*}
+    \rho u_{tt} = T u_{xx}
+\end{align*}
+
+\section*{Problem 4}
+\emph{The ($n$-dimensional) area of a surface $y = u(x)$ over a region $\Omega \subset \mathbb{R}^n$ is given by $$J(u) = \int_\Omega \sqrt{1 + |\nabla u|^2}\dd x.$$  Find the Euler-Lagrange equation (called the minimal surface equation) that is satisfied by a smooth extremum of this functional.} \\
+
+Let $\phi$ be a perturbation.  Then
+\begin{align*}
+    0 = \frac{\dd}{\dd \E} J(u + \E\phi) \Bigg|_{\E= 0} &= \frac{\dd}{\dd \E} \int_\Omega \sqrt{1 + |\nabla(u + \E\phi)|^2}\dd x \Bigg|_{\E= 0} \\
+    &= \int_\Omega \frac{1}{2}\qty(1 + |\nabla(u + \E\phi)|^2)^{-\frac{1}{2}}\ 2\nabla(u + \E\phi)\nabla \phi \dd x \Bigg|_{\E= 0} \\
+    &= \int_\Omega \frac{\nabla u \cdot \nabla \phi}{\sqrt{1 + |\nabla u|^2}} \dd x \\
+    &= \int_\Omega \nabla f \cdot \nabla \phi \dd x
+\end{align*}
+where
+\begin{align*}
+    f = \frac{u}{\sqrt{1 + |\nabla u|^2}}
+\end{align*}
+However, by Green's first identity,
+\begin{align*}
+    \nabla f \cdot \nabla \phi = \nabla \cdot(\phi\nabla f) - \phi\Delta f
+\end{align*}
+and thus
+\begin{align*}
+    0 &= \int_\Omega \nabla f \nabla \phi \dd x \\
+    &= \int_\Omega \qty[\nabla \cdot (\phi\nabla f) - \phi\Delta f]\dd x \\
+    &= \int_{\partial\Omega}(\phi\nabla f)\cdot n\ \dd s - \int_\Omega \phi\Delta f\dd x
+\end{align*}
+by the divergence theorem.  Either natural or Dirichlet boundary conditions will give
+\begin{align*}
+    \int_{\partial\Omega}(\phi\nabla f)\cdot n\ \dd s = 0
+\end{align*}
+and thus
+\begin{align*}
+    \int_\Omega \phi \Delta f\dd x = 0
+\end{align*}
+for all perturbations $\phi$.  Thus the Euler-Lagrange equation for $J(u)$ is
+\begin{align*}
+    \Delta f &= 0 \\
+    \implies \Delta \qty(\frac{u}{\sqrt{1 + |\nabla u|^2}}) &= 0
+\end{align*}
+
+\section*{Problem 5}
+\emph{Let $X = \{u \in C^1([-1,1])\ :\ u(-1) = -1,\ u(1) = 1\}$, where $C^1([a,b])$ denotes the space of continuously differentiable functions on $[a,b]$.  Define $J\ :\ X \rightarrow \mathbb{R}$ by $$J(u) = \int_{-1}^1 x^4 (u')^2 \dd x.$$}
+\begin{enumerate}[(a)]
+    \item \emph{Show that $$\inf_{u\in X}J(u) = 0,$$ but $J(u) > 0$ for every $u \in X$ (so $J$ does not attain its infimum on $X$).} \\
+
+    Let $\E_n = 2^{-n}$ and consider the following family of functions:
+    \begin{align*}
+        f_n(x) = \begin{cases}
+            -1 & x \in [-1, -\E_n] \\
+            \dfrac{-1}{2\E^3}x(x^2 - 3\E^2) & x \in [-\E_n, \E_n] \\
+            1 & x \in [\E_n, 1]
+        \end{cases}
+    \end{align*}
+    Note $u' = 0$ when $\E \leq |x| < 1$, and the maximum of $x$ when $u' \neq 0$ is $\E_n$.  Also, the maximal derivative of $f_n$ is $\frac{3}{2\E_n}$, which occurs at $x = 0$.  Thus,
+    \begin{align*}
+        J(f_n) &= \int_{-1}^1 x^4 (u')^2 \dd x \\
+        &= \cancelto{0}{\int_{-1}^{-\E_n} x^4 (u')^2 \dd x} + \int_{-\E_n}^{\E_n} x^4 (u')^2 \dd x + \cancelto{0}{\int_{\E_n}^1 x^4 (u')^2 \dd x} \\
+        &\leq \int_{-\E_n}^{\E_n} (\E_n)^4\qty(\frac{3}{2\E_n})^2 \dd x \\
+        &= \frac{9\E_n^2}{4}(2\E_n) \\
+        &= \frac{9\E_n^3}{2}
+    \end{align*}
+    Since $\E_n \rightarrow 0$, this means $J(f_n) \rightarrow 0$, and thus $\inf_{u \in X}J(u) \leq 0$.  But since $x^4(u')^2 \geq 0\ \forall u \in X$ then $J(u) \geq 0\ \forall u \in X$ proving $\inf_{u \in X}J(u) \geq 0$, and thus
+    \begin{align*}
+        \inf_{u \in X}J(u) = 0
+    \end{align*}
+    However, if $J(u) = 0$ for some function $u$, then $u' = 0$ for $x \in [-1, 1]$, i.e.~$u = c$ where $c$ is a constant.  This is a contradiction since $u(-1) = -1$, $u(1) = 1$, and $u$ is continuous.  Thus $J$ never attains its infimum on $X$.
+    \item \emph{What happens when you try to solve the Euler-Lagrange equation for extremals of $J$?} \\
+
+    Since $J(u) = \int_{-1}^1 x^4 (u')^2 \dd x$, then the Euler-Lagrange equation is
+    \begin{align*}
+        -\frac{\dd}{\dd x} F_{u'} + F_u &= 0 \\
+        -\frac{\dd}{\dd x}\qty[2x^4 u'] &= 0 \\
+        \implies -2x^4 u' &= c
+    \end{align*}
+    where $c$ is a constant.  Notice this is only possible for all $x \in [-1, 1]$ if $c = 0$ since when $x = 0$ the equation reduces to
+    \begin{align*}
+        0 = c
+    \end{align*}
+    So
+    \begin{align*}
+        x^4 u' = 0
+    \end{align*}
+    Assuming $x \neq 0$, this implies $u' = 0$ or $u = c_1$ where $c_1$ is arbitrary.  When $x = 0$, $u'$ has no restriction, and thus $u(0) = c_2$ where $c_2$ is arbitrary.  However, when we restrict the solutions with $u(-1) = -1$ and $u(1) = 1$, we see that we cannot form a continuous function that satisfies all conditions.  The best we can do is
+    \begin{align*}
+        u(x) = \begin{cases}
+            -1 & x \in [-1, 0) \\
+            0 & x = 0 \\
+            1 & x \in (0, 1]
+        \end{cases}
+    \end{align*}
+    Note this ``ideal'' function is approximated by $\lim_{n\rightarrow \infty} f_n$, but cannot be considered since it is not continuous.
+\end{enumerate}
+
+\end{document}
