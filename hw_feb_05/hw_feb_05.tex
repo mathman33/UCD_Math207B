@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+
+\usepackage{amssymb, amsmath, amsfonts}
+\usepackage{moreverb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{array}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage[makeroom]{cancel}
+\usepackage{bbold}
+\usepackage{alltt}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\usepackage{bigints}
+\allowdisplaybreaks
+\pgfplotsset{compat=1.12}
+
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}{Lemma}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\E}{\varepsilon}
+\def\Rl{\mathbb{R}}
+\def\Cx{\mathbb{C}}
+
+\title{\bf HW \#3}
+\author{\bf Sam Fleischer}
+\date{\bf February 05, 2015}
+
+\pgfplotsset{compat=1.12}
+
+\begin{document}
+\textbf{MATH 207B \hfill Applied Math \ \ \hfill Winter 2016\ \ \ }
+
+{\let\newpage\relax\maketitle}
+
+\section*{Problem 1}
+\emph{Suppose that $u(x)$ is a non-zero solution of the eigenvalue problem}
+\begin{align*}
+    \begin{array}{rr}
+        -u'' = \lambda u, &\qquad 0 < x < 1,\\
+        u(0) = 0, & u(1) = 0.
+    \end{array}
+\end{align*}
+\emph{Show that}
+\begin{align*}
+    \lambda = \frac{\int_0^1 (u')^2 \dd x}{\int_0^1 u^2 \dd x}.
+\end{align*}
+\emph{Deduce that every eigenvalue $\lambda$ is strictly positive.}
+
+\section*{Problem 2}
+\emph{Heat flows in a rod of length $L$ with a heat source $(a > 0)$ or sink $(a < 0)$ whose density $au$ is proportional to the temperature $u$.  Suppose that $u(x,t)$ satisfies the IBVP}
+\begin{align*}
+    \begin{array}{rrr}
+        u_t = Du_{xx} + au, & \qquad 0 < x < L, & \qquad t > 0, \\
+        u(0, t) = 0, & u(L, t) = 0, & \\
+        u(x, 0) = f(x). & &
+    \end{array}
+\end{align*}
+\begin{enumerate}[\bf (a)]
+    \item
+        \emph{Nondimensionalize the problem, and show that the IBVP can be written in nondimensional form as}
+        \begin{align*}
+            \begin{array}{rrr}
+                u_t = u_{xx} + \alpha u, & \qquad 0 < x < 1, & \qquad t > 0, \\
+                u(0, t) = 0, & u(1, t) = 0, & t > 0, \\
+                u(x, 0) = f(x). & &
+            \end{array}
+        \end{align*}
+        \emph{where $\alpha$ is a suitable nondimensional parameter.  Give a physical interpretation of $\alpha$.}
+    \item
+        \emph{Solve the IBVP in \textbf{(a)} be the method of separation of variables.}
+    \item
+        \emph{How does your solution behave as $t \rightarrow \infty$?  For what values of $\alpha$ does $u(x,t) \rightarrow 0$ as $t \rightarrow \infty$?  What happens for larger values of $\alpha$?  Give a physical explanation of this behavior in terms of the thermal energy.}
+\end{enumerate}
+
+\section*{Problem 3}
+\emph{Solve the following eigenvalue problem for the linear operator $-\frac{\dd^2}{\dd x^2}$ with Neumann BCs:}
+\begin{align*}
+    \begin{array}{rr}
+        -u'' = \lambda u, & \qquad 0 < x < 1, \\
+        u'(0) = 0, & u'(1) = 0.
+    \end{array}
+\end{align*}
+\begin{enumerate}[\bf (a)]
+    \item 
+        \emph{Find the eigenvalues $\lambda = \lambda_n$, where $n = 0, 1, 2, \dots$, and the corresponding eigenfunctions $u_n(x)$.}
+    \item
+        \emph{Show that the eigenfunctions can be normalized so that}
+        \begin{align*}
+            \int_0^1 u_m(x) u_n(x) \dd x = \delta_{mn} = \begin{cases}
+                1 & \text{ if }m = n \\
+                0 & \text{ if }m \neq n
+            \end{cases}
+        \end{align*}
+        \emph{where $\delta$ is the Kronecker Delta.}
+    \item
+        \emph{Does your argument in \textbf{Problem 1} that $\lambda \neq 0$ work in this case?}
+\end{enumerate}
+
+\section*{Problem 4}
+\begin{enumerate}[\bf (a)]
+    \item
+        \emph{Solve the following IBVP by the method of separation of variables}
+        \begin{align*}
+            \begin{array}{rrr}
+                u_t = u_{xx}, & \qquad 0 < x < 1, & \qquad t > 0, \\
+                u_x(0, t) = 0, & u_x(1, t) = 0 & t > 0 \\
+                u(x, 0) = f(x) & 0 < x < 1
+            \end{array}
+        \end{align*}
+    \item
+        \emph{How does your solution behave as $t \rightarrow \infty$?}
+    \item
+        \emph{Show directly from the IBVP in \textbf{(a)} that}
+        \begin{align*}
+            \int_0^1 u(x, t) \dd x = \int_0^1 f(x) \dd x\ \ \ \ \text{ for all }t \geq 0.
+        \end{align*}
+        \emph{Is this result consistent with your answer in \textbf{(b)}?  Give a physical explanation of the long-term behavior of $u(x,t)$.}
+\end{enumerate}
+
+\end{document}
