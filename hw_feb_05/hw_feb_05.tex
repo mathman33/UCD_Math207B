@@ -1,12 +1,14 @@
-\documentclass[12pt]{article}
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\setcounter{secnumdepth}{0}
 
 \usepackage{amssymb, amsmath, amsfonts}
 \usepackage{moreverb}
 \usepackage{graphicx}
 \usepackage{enumerate}
-\usepackage[margin=0.75in]{geometry}
 \usepackage{graphics}
 \usepackage{color}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \usepackage{array}
 \usepackage{float}
 \usepackage{hyperref}
@@ -38,18 +40,57 @@
 \def\Rl{\mathbb{R}}
 \def\Cx{\mathbb{C}}
 
-\title{\bf HW \#3}
-\author{\bf Sam Fleischer}
-\date{\bf February 05, 2015}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
 
-\pgfplotsset{compat=1.12}
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
 
-\begin{document}
-\textbf{MATH 207B \hfill Applied Math \ \ \hfill Winter 2016\ \ \ }
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancy} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead[L]{\bf Sam Fleischer}
+\fancyhead[C]{\bf UC Davis \\ Applied Mathematics (MAT207B)} % No page header - if you want one, create it in the same way as the footers below
+\fancyhead[R]{\bf Winter 2016}
 
-{\let\newpage\relax\maketitle}
+\fancyfoot[L]{\bf } % Empty left footer
+\fancyfoot[C]{\bf \thepage} % Empty center footer
+\fancyfoot[R]{\bf } % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
 
-\section*{Problem 1}
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{UC Davis, Applied Mathematics (MAT207B), Winter 2016} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{2pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Homework \#3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{\huge Sam Fleischer} % Your name
+
+\date{February 5, 2016} % Today's date or a custom date
+
+\begin{document}\thispagestyle{empty}
+
+\maketitle % Print the title
+
+\makeatletter
+\@starttoc{toc}
+\makeatother
+
+\pagebreak
+
+\section{Problem 1}
 \emph{Suppose that $u(x)$ is a non-zero solution of the eigenvalue problem}
 \begin{align*}
     \begin{array}{rr}
@@ -61,9 +102,33 @@
 \begin{align*}
     \lambda = \frac{\int_0^1 (u')^2 \dd x}{\int_0^1 u^2 \dd x}.
 \end{align*}
-\emph{Deduce that every eigenvalue $\lambda$ is strictly positive.}
+\emph{Deduce that every eigenvalue $\lambda$ is strictly positive.} \\
 
-\section*{Problem 2}
+Note that, by integration by parts,
+\begin{align*}
+    \int_0^1 (u')^2\dd x = [u' u]\Big|_0^1 - \int_0^1 u'' u \dd x
+\end{align*}
+The Dirichlet boundary conditions give us $[u' u]\Big|_0^1 = u'(1)u(1) - u'(0)u(0) = 0$.  Thus
+\begin{align*}
+    \int_0^1 (u')^2 \dd x = -\int_0^1 u'' u \dd x
+\end{align*}
+The differential equation $-u'' = \lambda u$ implies
+\begin{align*}
+    -u'' u &= \lambda u^2 \\
+    \implies \int_0^1 (u')^2 \dd x &= \lambda \int_0^1 u^2 \dd x \\
+    \implies \lambda &= \frac{\int_0^1(u')^2 \dd x}{\int_0^1 u^2 \dd x}
+\end{align*}
+Since $u(0) = u(1) = 0$ and $u$ is a non-zero solution, there must exist a region in which $u(x) > 0$.  Since $u$ is twice differentiable, this implies there is a region in which $u' > 0$.  Thus
+\begin{align*}
+    \int_0^1 (u')^2 \dd x > 0
+\end{align*}
+and since $u$ is non-zero,
+\begin{align*}
+    \int_0^1 u^2 \dd x > 0
+\end{align*}
+Thus $\lambda$ is strictly positive.
+
+\section{Problem 2}
 \emph{Heat flows in a rod of length $L$ with a heat source $(a > 0)$ or sink $(a < 0)$ whose density $au$ is proportional to the temperature $u$.  Suppose that $u(x,t)$ satisfies the IBVP}
 \begin{align*}
     \begin{array}{rrr}
@@ -82,14 +147,100 @@
                 u(x, 0) = f(x). & &
             \end{array}
         \end{align*}
-        \emph{where $\alpha$ is a suitable nondimensional parameter.  Give a physical interpretation of $\alpha$.}
+        \emph{where $\alpha$ is a suitable nondimensional parameter.  Give a physical interpretation of $\alpha$.} \\
+
+        Let $\overline{x} = \dfrac{x}{X}$, $\overline{t} = \dfrac{t}{T}$, $\overline{u}(\overline{x}, \overline{t}) = \dfrac{u(x,t)}{\theta}$, and $\overline{f}(\overline{x}) = \dfrac{f(x)}{\theta}$, and note $\dfrac{\partial}{\partial t} = \dfrac{\dd \overline{t}}{\dd t} \dfrac{\partial}{\partial\overline{t}}$, and $\dfrac{\partial^2}{\partial x^2} = \dfrac{\dd^2 \overline{x}}{\dd x^2} \dfrac{\partial^2}{\partial\overline{x}^2}$.  Thus,
+        \begin{align*}
+            u_t &= Du_{xx} + au \\
+            \implies \frac{\theta}{T}\overline{u}_{\overline{t}}(\overline{x}, \overline{t}) &= D\frac{\theta}{X^2}\overline{u}_{\overline{x}\overline{x}}(\overline{x}, \overline{t}) + a\theta\overline{u}(\overline{x}, \overline{t}) \\
+            \implies \overline{u}_{\overline{t}}(\overline{x}, \overline{t}) &= \frac{DT}{X^2}\overline{u}_{\overline{x}\overline{x}}(\overline{x}, \overline{t}) + aT\overline{u}(\overline{x}, \overline{t})
+        \end{align*}
+        Let $X = L$ and $T = \dfrac{L^2}{D}$, and define $\alpha = \dfrac{aL^2}{D}$.  Then
+        \begin{align*}
+            \overline{u}_{\overline{t}}(\overline{x}, \overline{t}) &= \overline{u}_{\overline{x}\overline{x}}(\overline{x}, \overline{t}) + \alpha\overline{u}(\overline{x}, \overline{t})
+        \end{align*}
+        The boundary conditions
+        \begin{align*}
+            x = 0\ \ \ \ \text{ and }\ \ \ \ x = L
+        \end{align*} imply
+        \begin{align*}
+            \overline{x} = \frac{0}{X} = \frac{0}{L} = 0\ \ \ \ \text{ and }\ \ \ \ \overline{x} = \frac{L}{X} = \frac{L}{L} = 1
+        \end{align*}
+        respectively.  The initial condition
+        \begin{align*}
+            u(x,0) = f(x)
+        \end{align*}
+        implies
+        \begin{align*}
+            \overline{u}(\overline{x}, 0) = \dfrac{u(x,0)}{\theta} = \dfrac{f(x)}{\theta} = \overline{f}(\overline{x})
+        \end{align*}
+        Lastly, $t > 0 \implies \overline{t} > 0$ since $T > 0$.  Thus the system nondimensionalizes to
+        \begin{align*}
+            \begin{array}{rrr}
+                \overline{u}_{\overline{t}} = \overline{u}_{\overline{x}\overline{x}} + \alpha \overline{u}, & \qquad 0 < \overline{x} < 1, & \qquad \overline{t} > 0, \\
+                \overline{u}(0, \overline{t}) = 0, & \overline{u}(1, \overline{t}) = 0, & \overline{t} > 0, \\
+                \overline{u}(\overline{x}, 0) = \overline{f}(\overline{x}). & &
+            \end{array}
+        \end{align*}
+        Now that the system is nondiomensionalized, we may remove the bars above all variables:
+        \begin{align*}
+            \begin{array}{rrr}
+                u_{t} = u_{xx} + \alpha u, & \qquad 0 < x < 1, & \qquad t > 0, \\
+                u(0, t) = 0, & u(1, t) = 0, & t > 0, \\
+                u(x, 0) = f(x). & &
+            \end{array}
+        \end{align*}
     \item
-        \emph{Solve the IBVP in \textbf{(a)} be the method of separation of variables.}
+        \emph{Solve the IBVP in \textbf{(a)} be the method of separation of variables.} \\
+
+        Suppose $u(x,t) = F(x)G(t)$.  Then
+        \begin{align*}
+            FG' &= F''G + \alpha FG \\
+            \implies \frac{G'}{G} &= \frac{F''}{F} + \alpha = \lambda \\
+            \implies G' = \lambda G\ \ \ \ &\text{and}\ \ \ \ F'' = (\lambda - \alpha)F
+        \end{align*}
+        The fundamental set of solutions for $F$ are
+        \begin{align*}
+            F(x) = c_1\exp[\sqrt{\lambda - \alpha}x] + c_2\exp[-\sqrt{\lambda - \alpha}x]
+        \end{align*}
+        if $\lambda - \alpha \neq 0$ and
+        \begin{align*}
+            F(x) = c_1 + c_2 x
+        \end{align*}
+        if $\lambda - \alpha = 0$.  The boundary conditions on $u$ imply $F(0) = F(1) = 0$, and thus $\lambda - \alpha \geq 0$ implies $F \equiv 0$.  If $\lambda - \alpha < 0$, then
+        \begin{align*}
+            F(x) = c_1\cos\qty(\sqrt{\alpha - \lambda}x) + c_2\sin\qty(\sqrt{\alpha - \lambda}x)
+        \end{align*}
+        $F(0) = 0 \implies c_1 = 0$, and so,
+        \begin{align*}
+            F(x) = c\sin\qty(\sqrt{\alpha - \lambda}x)
+        \end{align*}
+        $F(1) = 0 \implies \sqrt{\alpha - \lambda} = n\pi$ for $n \in \mathbb{Z}\setminus\{0\}$.  Thus the eigenvalues are $\lambda = \alpha - n^2\pi^2$.  The fundamental set of solutions for $G$ are
+        \begin{align*}
+            G(t) = c\exp[\lambda t] = c\exp[(\alpha - n^2\pi^2)t]
+        \end{align*}
+        Thus the general solution can be written as
+        \begin{align*}
+            \boxed{u(x,t) = \sum_{n=1}^\infty c_n \exp[(\alpha - n^2\pi^2)t]\sin\qty(n\pi x)}
+        \end{align*}
+        The initial condition implies
+        \begin{align*}
+            f(x) = u(x,0) = \sum_{n=1}^\infty c_n \sin\qty(n\pi x)
+        \end{align*}
+        which shows the sequence $(c_n)_n$ are the Fourier coefficients of the $\sin$ series of $f$, i.e.
+        \begin{align*}
+            \boxed{c_n = 2\int_0^1 f(x) \sin\qty(n\pi x)\dd x}
+        \end{align*}
+        for $n \geq 1$.
     \item
-        \emph{How does your solution behave as $t \rightarrow \infty$?  For what values of $\alpha$ does $u(x,t) \rightarrow 0$ as $t \rightarrow \infty$?  What happens for larger values of $\alpha$?  Give a physical explanation of this behavior in terms of the thermal energy.}
+        \emph{How does your solution behave as $t \rightarrow \infty$?  For what values of $\alpha$ does $u(x,t) \rightarrow 0$ as $t \rightarrow \infty$?  What happens for larger values of $\alpha$?  Give a physical explanation of this behavior in terms of the thermal energy.} \\
+
+        If $\alpha < \pi^2$, then $\lim_{t\rightarrow\infty}u(x,t) = 0$ since the exponential term will decay and the Fourier coefficients are bounded.  For $\alpha \geq \pi^2$, there is an $N_\alpha$ such that if $n > N_\alpha$ then $\alpha - n^2 \pi^2 < 0$.  This means $\lim_{t\rightarrow\infty}u(x,t)$ may diverge at any $x$.  However, we can avoid blowup if $c_n = 0$ for $n = 1, 2, \dots N_\alpha$.  If $\alpha > 0$, this corresponds to heat accumulating exponentially on the rod.  This means heat accumulates faster on parts of the rod that are hotter.  If $\alpha$ is negative, hotter parts of the rod lose more heat than cooler parts, resulting in a quicker decay.
+
+        Since $\alpha = aT$ and $T$ is the timescale of the diffusion and $a$ is the rate of outside heat accumulation, then $\alpha$ can be understood as the ratio of the relevant time scales.  There is a critical value ($\alpha = \pi^2$) at which the heat can not diffuse as fast as the heat is accumulating.
 \end{enumerate}
 
-\section*{Problem 3}
+\section{Problem 3}
 \emph{Solve the following eigenvalue problem for the linear operator $-\frac{\dd^2}{\dd x^2}$ with Neumann BCs:}
 \begin{align*}
     \begin{array}{rr}
@@ -100,6 +251,23 @@
 \begin{enumerate}[\bf (a)]
     \item 
         \emph{Find the eigenvalues $\lambda = \lambda_n$, where $n = 0, 1, 2, \dots$, and the corresponding eigenfunctions $u_n(x)$.}
+        \begin{align*}
+            u'' + \lambda u &= 0 \\
+            \implies u(x) &= c_1\exp[\sqrt{-\lambda}x] + c_2\exp[-\sqrt{-\lambda}x]\ \ \ \ \ \text{if $\lambda \neq 0$, and} \\
+            u(x) &= c_1 + c_2 x\ \ \ \ \ \text{if $\lambda = 0$.}
+        \end{align*}
+        If $\lambda < 0$, then the Neumann boundary conditions $u'(0) = u'(1) = 0$ imply $u(x) \equiv 0$.  If $\lambda = 0$, then the boundary conditions give us $u(x) = c$ as an eigenfunction, where $c$ is a constant.  If $\lambda > 0$, then the boundary conditions give us $u(x) = b\cos\qty(n\pi x)$ where $\lambda = n^2\pi^2$ as an eigenfunction.  Thus the eigenvalues are
+        \begin{align*}
+        \lambda_n &= n^2\pi^2\ \ \ \ \ \text{for $n = 0, 1, 2, \dots$}
+        \end{align*}
+        and the corresponding eigenfunctions are
+        \begin{align*}
+            u_n(x) = \cos\qty(n\pi x)\ \ \ \ \ \text{for $n = 0, 1, 2, \dots$}
+        \end{align*}
+        Thus, the general solution is
+        \begin{align*}
+            u(x) = c_0 + \sum_{n=1}^\infty c_n \cos\qty(n\pi x)
+        \end{align*}
     \item
         \emph{Show that the eigenfunctions can be normalized so that}
         \begin{align*}
@@ -108,12 +276,32 @@
                 0 & \text{ if }m \neq n
             \end{cases}
         \end{align*}
-        \emph{where $\delta$ is the Kronecker Delta.}
+        \emph{where $\delta$ is the Kronecker Delta.} \\
+
+        The functions are orthogonal since
+        \begin{align*}
+            \langle \cos\qty(n\pi x), \cos\qty(m\pi x) \rangle = \int_0^1\cos\qty(n\pi x)\cos\qty(m \pi x)\dd x = 0
+        \end{align*}
+        for $n \neq m$.  For $1 \leq n = m$,
+        \begin{align*}
+            \langle \cos\qty(n\pi x), \cos\qty(m\pi x) &= \int_0^1\cos^2\qty(n\pi x)\dd x = \frac{1}{2}\int_0^1\qty[1 + \cos\qty(2n\pi x)] = \frac{1}{2}
+        \end{align*}
+        Thus,
+        \begin{align*}
+            \norm{u_n}^2 = \frac{1}{2} \implies \norm{u_n} = \frac{1}{\sqrt{2}}
+        \end{align*}
+        and so the family
+        \begin{align*}
+            \left\{1\right\}\cup\left\{\sqrt{2}\cos\qty(n\pi x)\right\}_{n=1}^\infty
+        \end{align*}
+        is an orthonormal set.
     \item
-        \emph{Does your argument in \textbf{Problem 1} that $\lambda \neq 0$ work in this case?}
+        \emph{Does your argument in \textbf{Problem 1} that $\lambda \neq 0$ work in this case?} \\
+
+        No, the argument does not hold in this case because the Neumann boundary conditions do not rule out non-zero constant functions, which is precisely the solution we get when $\lambda = 0$.
 \end{enumerate}
 
-\section*{Problem 4}
+\section{Problem 4}
 \begin{enumerate}[\bf (a)]
     \item
         \emph{Solve the following IBVP by the method of separation of variables}
@@ -124,14 +312,75 @@
                 u(x, 0) = f(x) & 0 < x < 1
             \end{array}
         \end{align*}
+
+        Suppose $u(x,t) = F(x)G(t)$.  Then
+        \begin{align*}
+            FG' &= F''G \\
+            \implies \frac{G'}{G} &= \frac{F''}{F} = \lambda \\
+            \implies G' = \lambda G\ \ \ \ &\text{and}\ \ \ \ F'' = \lambda F
+        \end{align*}
+        The fundamental set of solutions for $F$ are
+        \begin{align*}
+            F(x) = c_1\exp[\sqrt{\lambda}x] + c_2\exp[-\sqrt{\lambda}x]
+        \end{align*}
+        if $\lambda - \alpha \neq 0$ and
+        \begin{align*}
+            F(x) = c_1 + c_2 x
+        \end{align*}
+        if $\lambda - \alpha = 0$.  The boundary conditions on $u$ imply $F'(0) = F'(1) = 0$, and thus $\lambda > 0$ implies $F \equiv 0$.  If $\lambda = 0$, then
+        \begin{align*}
+            F'(x) = c_2
+        \end{align*}
+        The boundary conditions $F'(0) = F'(1) = 0$ imply $c_2 = 0$ and thus
+        \begin{align*}
+            F(x) = c
+        \end{align*}
+        is a solution.  If $\lambda < 0$, then
+        \begin{align*}
+            F(x) = c_1\cos\qty(\sqrt{-\lambda}x) + c_2\sin\qty(\sqrt{-\lambda}x)
+        \end{align*}
+        $F'(0) = 0 \implies c_2 = 0$, and so,
+        \begin{align*}
+            F(x) = c\cos\qty(\sqrt{-\lambda}x)
+        \end{align*}
+        $F'(1) = 0 \implies \sqrt{-\lambda} = n\pi$ for $n \in \mathbb{Z}\setminus\{0\}$.  Thus the eigenvalues are $\lambda = -n^2\pi^2$.  The fundamental set of solutions for $G$ are
+        \begin{align*}
+            G(t) = c\exp[\lambda t] = c\exp[-n^2\pi^2t]
+        \end{align*}
+        Thus the general solution can be written as
+        \begin{align*}
+            \boxed{u(x,t) = c_0 + \sum_{n=1}^\infty c_n \exp[-n^2\pi^2t]\cos\qty(n\pi x)}
+        \end{align*}
+        The initial condition implies
+        \begin{align*}
+            f(x) = u(x,0) = c_0 + \sum_{n=1}^\infty c_n \cos\qty(n\pi x)
+        \end{align*}
+        which shows the sequence $(c_n)_n$ are the Fourier coefficients of the $\sin$ series of $f$, i.e.
+        \begin{align*}
+            \boxed{c_n = 2\int_0^1 f(x) \sin\qty(n\pi x)\dd x}
+        \end{align*}
+        for $n \geq 0$.
     \item
         \emph{How does your solution behave as $t \rightarrow \infty$?}
+
+        \begin{align*}
+            \lim_{t\rightarrow\infty}u(x,t) = c_0 = \int_0^1 f(x) \dd x
+        \end{align*}
+        since the exponential term decays and the Fourier coefficients are bounded.  This is the average initial heat over the rod.  This is intuitive since the Neumann conditions imply the rod is insulated, which means the total amount of heat does not change at any time $t$.
     \item
         \emph{Show directly from the IBVP in \textbf{(a)} that}
         \begin{align*}
             \int_0^1 u(x, t) \dd x = \int_0^1 f(x) \dd x\ \ \ \ \text{ for all }t \geq 0.
         \end{align*}
-        \emph{Is this result consistent with your answer in \textbf{(b)}?  Give a physical explanation of the long-term behavior of $u(x,t)$.}
+        \emph{Is this result consistent with your answer in \textbf{(b)}?  Give a physical explanation of the long-term behavior of $u(x,t)$.} \\
+
+        \begin{align*}
+            \int_0^1 u(x,t) \dd x &= \int_0^1 c_0 \dd x + \int_0^1\sum_{n=1}^\infty c_n \exp[-n^2\pi^2 t]\cos(n\pi x) \dd x \\
+            &= c_0 + \cancelto{0}{\sum_{n=1}^\infty\exp[-n^2\pi^2 t]\int_0^1 \cos\qty(n\pi x)\dd x} \\
+            &= c_0 \\
+            &= \int_0^1 f(x) \dd x
+        \end{align*}
+        This means that the total heat in the rod is equal to the total amount of heat initially, which is consistent with part \textbf{(b)} and with the physical interpretation of the boundary conditions, which is that the rod is insulated.
 \end{enumerate}
 
 \end{document}
