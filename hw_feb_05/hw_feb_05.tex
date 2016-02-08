@@ -1,4 +1,4 @@
-\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\documentclass[fontsize=11pt]{article} % A4 paper and 11pt font size
 \setcounter{secnumdepth}{0}
 
 \usepackage{amssymb, amsmath, amsfonts}
@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage{graphics}
+\usepackage[margin=1.25in]{geometry}
 \usepackage{color}
 \usepackage{tocloft}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -60,6 +61,20 @@
 \renewcommand{\footrulewidth}{0pt} % Remove footer underlines
 \setlength{\headheight}{13.6pt} % Customize the height of the header
 
+\newcommand{\problem}[1]{
+\vspace{.375cm}
+\begin{minipage}{\textwidth}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \section{\bf #1}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \vspace{0.25cm}
+\end{minipage}
+}
+
 \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 \numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
@@ -90,7 +105,14 @@
 
 \pagebreak
 
-\section{Problem 1}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+\section{\bf Problem 1}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+
 \emph{Suppose that $u(x)$ is a non-zero solution of the eigenvalue problem}
 \begin{align*}
     \begin{array}{rr}
@@ -128,7 +150,14 @@ and since $u$ is non-zero,
 \end{align*}
 Thus $\lambda$ is strictly positive.
 
-\section{Problem 2}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+\section{\bf Problem 2}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+
 \emph{Heat flows in a rod of length $L$ with a heat source $(a > 0)$ or sink $(a < 0)$ whose density $au$ is proportional to the temperature $u$.  Suppose that $u(x,t)$ satisfies the IBVP}
 \begin{align*}
     \begin{array}{rrr}
@@ -240,7 +269,14 @@ Thus $\lambda$ is strictly positive.
         Since $\alpha = aT$ and $T$ is the timescale of the diffusion and $a$ is the rate of outside heat accumulation, then $\alpha$ can be understood as the ratio of the relevant time scales.  There is a critical value ($\alpha = \pi^2$) at which the heat can not diffuse as fast as the heat is accumulating.
 \end{enumerate}
 
-\section{Problem 3}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+\section{\bf Problem 3}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+
 \emph{Solve the following eigenvalue problem for the linear operator $-\frac{\dd^2}{\dd x^2}$ with Neumann BCs:}
 \begin{align*}
     \begin{array}{rr}
@@ -301,7 +337,14 @@ Thus $\lambda$ is strictly positive.
         No, the argument does not hold in this case because the Neumann boundary conditions do not rule out non-zero constant functions, which is precisely the solution we get when $\lambda = 0$.
 \end{enumerate}
 
-\section{Problem 4}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+\section{\bf Problem 4}
+\begin{center}
+    \noindent\rule{5cm}{1pt}
+\end{center}
+
 \begin{enumerate}[\bf (a)]
     \item
         \emph{Solve the following IBVP by the method of separation of variables}
