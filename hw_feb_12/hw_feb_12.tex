@@ -75,9 +75,11 @@
 \end{minipage}
 }
 
-\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
-\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
-\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\newcommand{\VEC}[2]{\left\langle #1, #2 \right\rangle}
+
+% \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
 
@@ -107,22 +109,62 @@
 
 \problem{Problem 1}
 \emph{The following nonhomogeneous IBVP describes heat flow in a rod whose ends are held at temperatures $u_0$, $u_1$:}
-\begin{align*}
-    &u_t = u_{xx}\ \ \ \ \ \ \ \ \ 0 < x < 1,\ \ \ \ \ t > 0 \\
-    &u(0, t) = u_0, \ \ \ \ \ \ \ u(1,t) = u_1 \\
-    &u(x,0) = f(x)
-\end{align*}
+\begin{equation}
+    \label{Dirichlet_lin}
+    \begin{aligned}
+        &u_t = u_{xx}\ \ \ \ \ \ \ \ \ 0 < x < 1,\ \ \ \ \ t > 0 \\
+        &u(0, t) = u_0, \ \ \ \ \ \ \ u(1,t) = u_1 \\
+        &u(x,0) = f(x)
+    \end{aligned}
+\end{equation}
 \begin{enumerate}[\bf (a)]  
     \item
-        \emph{Find te steady state temperature $U(x)$ taht satisfies}
+        \emph{Find the steady state temperature $U(x)$ that satisfies}
         \begin{align*}
             &U_{xx} = 0 \ \ \ \ \ 0 < x < 1 \\
             &U(0) = u_0,\ \ \ \ \ \ U(1) = u_1
         \end{align*}
+
+        $U_{xx} = 0$ implies $U(x)$ is a linear function.
+        \begin{align*}
+            U(x) = a + bx
+        \end{align*}
+        The boundary conditions imply
+        \begin{align*}
+            U(x) = u_0 + (u_1 - u_0)x
+        \end{align*}
     \item
-        \emph{Write $u(x,t) = U(x) + v(x,t)$ and find the corresponding IBVP for $v$.  Use separation of variables to solve for $v$ and hence $u$.}
+        \emph{Write $u(x,t) = U(x) + v(x,t)$ and find the corresponding IBVP for $v$.  Use separation of variables to solve for $v$ and hence $u$.} \\
+
+        If $u(x, t) = U(x) + v(x, t)$, then $u(0, t) = u_0 = U(0) + v(0, t)$ implies $v(0, t) = 0$.  Similarly, $v(1,t) = 0$.  Also, $u(x,0) = f(x) = U(x) + v(x,0)$ implies $v(x,0) = f(x) - U(x)$.  Lastly, partial differential equation $u_t = u_{xx}$ implies $v_t = U''(x) + v_{xx}$ but since $U'' = 0$, then $v_t = v_{xx}$.  The problem becomes
+        \begin{equation}
+            \label{Dirichlet_0}
+            \begin{aligned}
+                &v_t = v_{xx}\ \ \ \ \ \ \ \ \ 0 < x < 1,\ \ \ \ \ t > 0 \\
+                &v(0, t) = 0, \ \ \ \ \ \ \ v(1,t) = 0 \\
+                &v(x,0) = f(x) - U(x)
+            \end{aligned}
+        \end{equation}
+
+        By our last homework, the solution of (\ref{Dirichlet_0}) is
+        \begin{align*}
+            v(x,t) = \sum_{n=1}^\infty c_n e^{-n^2\pi^2 t}\sin\qty(n\pi x)
+        \end{align*}
+        where
+        \begin{align*}
+            c_n = 2\int_0^1\qty(f(x) - U(x))\sin\qty(n\pi x) \dd x
+        \end{align*}
+        Thus the solution to (\ref{Dirichlet_lin}) is
+        \begin{align*}
+            u(x, t) = u_0 + (u_1 - u_0)x + \sum_{n=1}^\infty c_n e^{-n^2\pi^2 t}\sin\qty(n\pi x)
+        \end{align*}
     \item
-        \emph{How does $u(x,t)$ behave as $t \rightarrow \infty$?}
+        \emph{How does $u(x,t)$ behave as $t \rightarrow \infty$?} \\
+
+        As $t \rightarrow \infty$, the coefficients of the $\sin$ series decay hyper-exponentially, and thus the solution rapidly approaches the linear function $U(x)$, i.e.
+        \begin{align*}
+            \lim_{t\rightarrow \infty} u(x,t) = U(x)
+        \end{align*}
 \end{enumerate}
 
 \problem{Problem 2}
@@ -130,29 +172,169 @@
 \begin{enumerate}[\bf (a)]
     \item
         \emph{Show that $A$ is formally self-adjoint.}
+        \begin{align*}
+            \VEC{u}{Av} &= \int_0^{2\pi} -i\overline{u}v'\dd x \\
+            &= -i\qty[\qty(\overline{u}v)_0^{2\pi} - \int_0^{2\pi}\overline{u'}v\dd x] \\
+            &= -i\qty(\overline{u(2\pi)}v(2\pi) - \overline{u(0)}v(0)) + \int_0^{2\pi} i \overline{u'}v \dd x \\
+            &= -i\qty(\overline{u(2\pi)}v(2\pi) - \overline{u(0)}v(0)) + \int_0^{2\pi} \overline{-iu'}v \dd x \\
+            &= -i\qty(\overline{u(2\pi)}v(2\pi) - \overline{u(0)}v(0)) + \VEC{Au}{v}
+        \end{align*}
+        Thus, given adequate boundary conditions, $A$ is self-adjoint, i.e. $A$ is formally self-adjoint.
     \item
         \emph{Show that $A$ with periodic boundary conditions $u(0) = u(2\pi)$ is self-adjoint, and find the eigenvalues and eigenfunctions of the corresponding eigenvalue problem $$ -iu' = \lambda u, \qquad u(0) = u(2\pi).$$}
+
+        If $u(0) = u(2\pi)$, then $\overline{0} = \overline{u(2\pi)}$.  Thus,
+        \begin{align*}
+            \VEC{u}{Av} = -i\qty(u(0)\qty[v(2\pi) - v(0)]) + \VEC{Au}{v}
+        \end{align*}
+        and so the adjoint boundary condition is $v(0) = v(2\pi)$.  In this case, $A$ is self-adjoint.
+
+        The solution to $-i u' = \lambda u$ is
+        \begin{align*}
+            u(x) = c\exp(\lambda i x)
+        \end{align*}
+        for some constant $c$.  The periodicity of $u$ implies
+        \begin{align*}
+            c &= c\exp(\lambda i 2\pi) \implies \lambda = n,\ \ \ \ \ n \in \mathbb{Z}
+        \end{align*}
     \item
-        \emph{What are the adjoint boundary conditions to the Dirichlet condition $u(0) = 0$ at $x = 0$?  Is $A$ with this Dirichlet boundary condition self-adjoint?  Find all eigenvalues and eigenfunctions of the corresponding eigenvalue problem $$ -iu' = \lambda u, \qquad u(0) = 0.$$  How does your result compare with the properties of finite-dimensional eigenvalue problems for matrices?}
+        \emph{What are the adjoint boundary conditions to the Dirichlet condition $u(0) = 0$ at $x = 0$?  Is $A$ with this Dirichlet boundary condition self-adjoint?  Find all eigenvalues and eigenfunctions of the corresponding eigenvalue problem $$ -iu' = \lambda u, \qquad u(0) = 0.$$  How does your result compare with the properties of finite-dimensional eigenvalue problems for matrices?} \\
+
+        If $u(0) = 0$ then $\overline{u(0)} = 0$ and 
+        \begin{align*}
+            \VEC{u}{Av} = -i\overline{u(2\pi)}v(2\pi) + \VEC{Au}{v}
+        \end{align*}
+        Thus the adjoint condition is $v(2\pi) = 0$, and in this case, $A$ is self-adjoint.  The solution to $-iu' = \lambda u$ is
+        \begin{align*}
+            u(x) = c\exp(\lambda i x)
+        \end{align*}
+        for some constant $c$.  The boundary condition $u(0) = 0$ implies $c = 0$, and thus $u \equiv 0$.  Since eigenvalues cannot have $0$ eigenfunctions, there are no eigenvalues for this eigenvalue problem.  This does not happen in finite-dimensional eigenvalue problems since all matrices (over algebraically closed fields, like $\Cx$) have at least one eigenvalue.
 \end{enumerate}
 
 \problem{Problem 3}
-\emph{Let $A$ be a Sturm-Liouville operator, given by $$Au = -(pu')' + qu,$$ acting in $L^2(a,b)$.  Verify that $A$ with the Robin boundary conditions $$\alpha u'(a) + u(a) = 0, \qquad u;(b) + \beta u(b) = 0$$ is self adjoint.}
+\emph{Let $A$ be a Sturm-Liouville operator, given by $$Au = -(pu')' + qu,$$ acting in $L^2(a,b)$.  Verify that $A$ with the Robin boundary conditions $$\alpha u'(a) + u(a) = 0, \qquad u'(b) + \beta u(b) = 0$$ is self adjoint.}
+\begin{align*}
+    \VEC{u}{Av} &= \int_a^b \qty[u\qty(-(pv')' + qv)]\dd x \\
+    &= -\int_a^b u p' v' \dd x - \int_a^b u p v'' \dd x + \int_a^b u q v \dd x
+\end{align*}
+We can integrate the middle integral by parts:
+\begin{align*}
+    \int_a^b u p v'' \dd x &= \qty[u p v']_a^b - \int_a^b (u p' v' + u' p v') \dd x \\
+    \implies \VEC{u}{Av} &= -\qty[upv']_a^b + \int_a^b u' p v'\dd x + \int_a^b u q v \dd x \\
+\end{align*}
+Again, we can integrate the leftmost integral by parts:
+\begin{align*}
+    \int_a^b u' p v'\dd x &= \qty[u' p v]_a^b - \int_a^b (u'' p v - u' p' v) \dd x \\
+    \implies \VEC{u}{Av} &= \qty[p(u'v - uv')]_a^b + \int_a^b (-(u'' p v + u' p' v) + u q v) \dd x \\
+    &= \qty[p(u'v - uv')]_a^b + \int_a^b \qty[\qty(-(pu')' + qu)v]\dd x \\
+    &= \qty[p(u'v - uv')]_a^b + \VEC{Au}{v}
+\end{align*}
+The Robin boundary conditions imply $u'(a) = -\frac{u(a)}{\alpha}$ and $u'(b) = -\beta u(b)$.  If we impose the adjoint condition $$\alpha v'(a) + v(a) = 0, \qquad v'(b) + \beta v(b) = 0,$$ then
+\begin{align*}
+    \qty[p(u'v - uv')]_a^b &= p(b)\qty(u'(b)v(b) - u(b)v'(b)) - p(a)\qty(u'(a)v(a) - u(a)v'(a)) \\
+    &= p(b)\qty(-\beta u(b)v(b) + \beta u(b)v(b)) - p(a)\qty(-\frac{1}{\alpha}u(a)v(a) + \frac{1}{\alpha}u(a)v(a)) \\
+    &= 0
+\end{align*}
+and thus $A$ is self-adjoint.
 
 \problem{Problem 4}
-\emph{Show that the eigenvalues of the Sturm-Lioville problem}
+\emph{Show that the eigenvalues of the Sturm-Liouville problem}
 \begin{align*}
     &-u'' = \lambda u \qquad 0 < x < 1 \\ &u(0) = 0, \qquad u'(1) + \beta u(1) = 0
 \end{align*}
-\emph{are given by $\lambda = k^2$ where $k > 0$ satisfies the equation $$ \beta \tan k + k = 0.$$  Show graphically that there is an infinite sequence of simple eigenvalues $\lambda_1 < \lambda_2 < \dots < \lambda_n < \dots$ with $\lambda_n \rightarrow \infty$ as $n \rightarrow \infty$.  What is the asymptotic behavior of $\lambda_n$ as $n \rightarrow \infty$?}
+\emph{are given by $\lambda = k^2$ where $k > 0$ satisfies the equation $$ \beta \tan k + k = 0.$$  Show graphically that there is an infinite sequence of simple eigenvalues $\lambda_1 < \lambda_2 < \dots < \lambda_n < \dots$ with $\lambda_n \rightarrow \infty$ as $n \rightarrow \infty$.  What is the asymptotic behavior of $\lambda_n$ as $n \rightarrow \infty$?} \\
+
+If $\lambda = 0$, the solutions to $-u'' = \lambda u$ are
+\begin{align*}
+    u(x) = c_1 + c_2 x
+\end{align*}
+Then $u(0) = 0 \implies c_1 = 0$, i.e.
+\begin{align*}
+    u(x) &= c_2 x \\
+    u'(x) &= c_2
+\end{align*}
+The Robin boundary condition $u'(1) + \beta u(1) = 0$ implies
+\begin{align*}
+    0 &= c_2 + \beta c_2 = c_2(1 + \beta)
+\end{align*}
+If $\beta \neq -1$, then $c_2 = 0$ and thus $u \equiv 0$.  If $\lambda \neq 0$, the solutions to $-u'' = \lambda u$ are
+\begin{align*}
+    u(x) &= c_1\exp(\sqrt{\lambda}x) + c_2\exp(-\sqrt{\lambda}x)
+\end{align*}
+If $\lambda > 0$, then $u(0) = 0$ implies $c_1 = -c_2$, i.e.
+\begin{align*}
+    u(x) &= c_1\qty[\exp(\sqrt{\lambda}x) - \exp(-\sqrt{\lambda}x)] \\
+    u'(x) &= c_1\sqrt{\lambda}\qty[\exp(\sqrt{\lambda}x) + \exp(-\sqrt{\lambda}x)]
+\end{align*}
+The Robin boundary condition $u'(1) + \beta u(1) = 0$ implies
+\begin{align*}
+    0 &= c_1\sqrt{\lambda}\qty[\exp(\sqrt{\lambda}) + \exp(-\sqrt{\lambda})] + \beta c_1 \qty[\exp(\sqrt{\lambda}) - \exp(-\sqrt{\lambda})] \\
+    &= \qty(\sqrt{\lambda} + \beta)\exp(\sqrt{\lambda}) + \qty(\sqrt{\lambda} - \beta)\exp(-\sqrt{\lambda})
+\end{align*}
+If $\lambda < 0$, then the solution is given by
+\begin{align*}
+    u(x) = c_1\cos\qty(\sqrt{-\lambda}x) + c_2\sin\qty(\sqrt{-\lambda}x)
+\end{align*}
+The boundary condition $u(0) = 0$ implies $c_1 = 0$, i.e.
+\begin{align*}
+    u(x) &= c_2\sin\qty(\sqrt{-\lambda}x) \\
+    u'(x) &= c_2\sqrt{-\lambda}\cos\qty(\sqrt{-\lambda}x)
+\end{align*}
+The Robin boundary condition $u'(1) + \beta u(1) = 0$ implies
+\begin{align*}
+    0 &= c_2\sqrt{-\lambda}\cos\qty(\sqrt{-\lambda}) + \beta c_2\sin\qty(\sqrt{-\lambda}) \\
+    &= \sqrt{-\lambda} +\beta\tan\qty(\sqrt{-\lambda})\qquad \text{provided $c_2 \neq 0$} \\
+    &= \beta\tan k + k
+\end{align*}
+where $k^2 = -\lambda$.  Let the solutions to $0 = \beta \tan k + k$ be $k_n$ where $\frac{\pi}{2} < |k_{n+1} - k_n| < \pi$ for all $n$.  Also, $k_n \rightarrow \infty$, and thus $\lambda_n \rightarrow \infty$ as $n \rightarrow \infty$.
 
 \problem{Problem 5}
 \emph{THe following IBVP describes heat flow in a rod whose left end is held at temperature $0$ and whose right end loses heat to the surroundings according to Newton's law of cooling (heat flux is proportional to the temperature difference):}
 \begin{align*}
     &u_t = u_{xx} \qquad 0 < x < 1,\ \ \ t > 0 \\
-    &u(0, t) = 0, \qquad u'(1, t) = -\beta u(1,t) \\
+    &u(0, t) = 0, \qquad u_x(1, t) = -\beta u(1,t) \\
     &u(x,0) = f(x)
 \end{align*}
-\emph{Solve this IBVP by the method of separation of variables.}
+\emph{Solve this IBVP by the method of separation of variables.} \\
+
+Assume the solution $u(x,t) = F(x)G(t)$.  Then $FG' = F''G$, which implies $\frac{G'}{G} = \frac{F''}{F} = \lambda$, i.e.
+\begin{align*}
+    G' - \lambda G = 0 \qquad \text{and} \qquad F'' - \lambda F = 0
+\end{align*}
+Then
+\begin{align*}
+    G(t) = c\exp[\lambda t]
+\end{align*}
+and, if $\lambda \neq 0$, then
+\begin{align*}
+    F(x) = c_1\exp[\sqrt{\lambda}x] + c_2\exp[-\sqrt{\lambda}x]
+\end{align*}
+If $\lambda = 0$, then
+\begin{align*}
+    F(x) = c_1 + c_2x
+\end{align*}
+The left boundary condition implies $F(0) = 0$, and so if $\lambda = 0$ then $c_1 = 0$.  Then $F(x) = c_2 x$.  The right boundary condition implies $F'(1) = -\beta F(1)$.  Thus $c_2 = -\beta c_2 \iff c_2(1 + \beta) = 0 \iff \beta = -1$ for nontrivial solutions $F$.  If $\lambda > 0$, then the left boundary condition implies $c_1 = -c_2$, and thus
+\begin{align*}
+    F(x) &= c_1\qty(\exp[\sqrt{\lambda}x] - \exp[-\sqrt{\lambda}x]) \\
+    F'(x) &= c_1\sqrt{\lambda}\qty(\exp[\sqrt{\lambda}x] + \exp[-\sqrt{\lambda}x])
+\end{align*}
+The right boundary condition implies
+\begin{align*}
+    -c_1\beta \qty(\exp[\sqrt{\lambda}] - \exp[-\sqrt{\lambda}]) &= c_1\sqrt{\lambda}\qty(\exp[\sqrt{\lambda}] + \exp[-\sqrt{\lambda}]) \\
+    \qty(\sqrt{\lambda} + \beta)\exp[\sqrt{\lambda}] + \qty(\sqrt{\lambda} - \beta)\exp[-\sqrt{\lambda}] &= 0
+\end{align*}
+If $\lambda < 0$, then
+\begin{align*}
+    F(x) &= c_1\sin\qty(\sqrt{-\lambda}x) + c_2\cos\qty(\sqrt{-\lambda}x)
+\end{align*}
+By number 4, 
+\begin{align*}
+    F(x) = c_1\sin\qty(\sqrt{-\lambda}x)
+\end{align*}
+Thus the general solution can be written as
+\begin{align*}
+    u(x,t) = \sum_{n=1}^\infty c_n\exp[\lambda_n t]\sin\qty(\sqrt{-\lambda_n}x)
+\end{align*}
+where $\lambda_n < 0$ for all $n$ and $\lambda_n \rightarrow -\infty$ as $n \rightarrow \infty$.
 
 \end{document}
