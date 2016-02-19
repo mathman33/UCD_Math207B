@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  18 FEB 2016 23:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 FEB 2016 00:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2249,25 +2249,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--67
 [7 </Users/samuelfleischer/School/UCD/UCD_Math207B/hw_feb_19/problem_3c.png>]) 
 (/Users/samuelfleischer/School/UCD/UCD_Math207B/hw_feb_19/problem_4.tex
 LaTeX Font Info:    Font shape `T1/futs/bx/it' in size <10> not available
-(Font)              Font shape `T1/futs/b/it' tried instead on input line 9.
+(Font)              Font shape `T1/futs/b/it' tried instead on input line 15.
 
-Overfull \hbox (68.33157pt too wide) in paragraph at lines 9--10
+Overfull \hbox (68.33157pt too wide) in paragraph at lines 15--16
 []\T1/futs/m/it/10 HINT. Ap-ply the di-ver-gence the-o-rem in space-time to the
  equa-tion in \T1/futs/b/it/10 (a) \T1/futs/m/it/10 over the trun-cated cone $[
 ]$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--10
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
 
  []
 
-) [9]
+) [9] [10]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 114.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 114.
 (/Users/samuelfleischer/School/UCD/UCD_Math207B/hw_feb_19/hw_feb_19.aux)
@@ -2278,9 +2278,9 @@ Package rerunfilecheck Info: File `hw_feb_19.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 114.
  ) 
 Here is how much of TeX's memory you used:
- 34418 strings out of 493089
- 780437 string characters out of 6134842
- 950817 words of memory out of 5000000
+ 34419 strings out of 493089
+ 780444 string characters out of 6134842
+ 949815 words of memory out of 5000000
  37277 multiletter control sequences out of 15000+600000
  142314 words of font info for 134 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2299,10 +2299,10 @@ texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/local/texlive/2015/texmf-d
 ist/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/texlive/2015/texmf-dist/fo
 nts/type1/public/cm-super/sfit1000.pfb>
 Output written on /Users/samuelfleischer/School/UCD/UCD_Math207B/hw_feb_19/hw_f
-eb_19.pdf (9 pages, 144272 bytes).
+eb_19.pdf (10 pages, 145325 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
  50 words of extra memory for PDF output out of 10000 (max. 10000000)
 

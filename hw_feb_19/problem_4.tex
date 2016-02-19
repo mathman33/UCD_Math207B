@@ -3,6 +3,12 @@
 \begin{enumerate}[\bf (a)]
     \item
         \emph{Show that $u$ satisfies the energy equation $$\frac{1}{2}\qty(u_t^2 + c_0^2|\grad u|^2)_t - \grad \cdot \qty(c_0^2 u_t\grad u) = 0.$$}
+        \begin{align*}
+            u_{tt} &= c_0^2 \Delta u \\
+            \iff u_tu_{tt} &= c_0^2 u_t\Delta u \\
+            \iff u_tu_{tt} + c_0^2 \grad u \cdot \grad u_t &= c_0^2u_t\Delta u + c_0^2 \grad u \cdot \grad u_t \\
+            \iff \frac{1}{2}\qty(u_t^2 + c_0^2|\grad u|^2)_t &= \grad \cdot \qty(c_0^2 u_t \grad u)
+        \end{align*}
     \item
         \emph{For $T > 0$, let $\Omega_T \subset \Rl^{n+1}$ be the space-time cone $$\Omega_T = \left\{(x,t) \in \Rl^{n+1}\ :\ |x| < c_0(T - t),\ 0 < t < T\right\},$$ and for $0 \leq t \leq T$, let $B(T - t)$ be the spatial cross-section of $\Omega_T$ at time $t$ $$B(T - t) = \left\{x \in \Rl^n\ :\ |x| < c_0(T - t)\right\}.$$  Define $$e_T(t) = \frac{1}{2}\int_{B(T - t)}\qty(u_t^2 + c_0^2|\grad u|^2)\dd x,$$ and show that $e_T(t) \leq e_T(0)$.}
 
