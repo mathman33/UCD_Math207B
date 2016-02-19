@@ -1,0 +1,62 @@
+\problem{Problem 4}
+\emph{Suppose that $u(x,t)$ is a smooth solution of the wave equation $$u_{tt} = c_0^2 \Delta u,$$ where $x \in \Rl^n$, the wave speed $c_0 > 0$ is a constant.}
+\begin{enumerate}[\bf (a)]
+    \item
+        \emph{Show that $u$ satisfies the energy equation $$\frac{1}{2}\qty(u_t^2 + c_0^2|\grad u|^2)_t - \grad \cdot \qty(c_0^2 u_t\grad u) = 0.$$}
+    \item
+        \emph{For $T > 0$, let $\Omega_T \subset \Rl^{n+1}$ be the space-time cone $$\Omega_T = \left\{(x,t) \in \Rl^{n+1}\ :\ |x| < c_0(T - t),\ 0 < t < T\right\},$$ and for $0 \leq t \leq T$, let $B(T - t)$ be the spatial cross-section of $\Omega_T$ at time $t$ $$B(T - t) = \left\{x \in \Rl^n\ :\ |x| < c_0(T - t)\right\}.$$  Define $$e_T(t) = \frac{1}{2}\int_{B(T - t)}\qty(u_t^2 + c_0^2|\grad u|^2)\dd x,$$ and show that $e_T(t) \leq e_T(0)$.}
+
+        \emph{HINT.  Apply the divergence theorem in space-time to the equation in \textbf{(a)} over the truncated cone $\left\{(x, t') \in \Omega_T\ :\ 0 < t' < t\right\}$, and note that the space-time normal to the side of the cone $\Omega_T$ is $N = \dfrac{(\hat{x}, c_0)}{\sqrt{1 + c_0^2}}$ where $\hat{x} = \dfrac{x}{|x|}$.} \\
+
+        Let $F\ :\ \Rl^{n+1} \rightarrow \Rl^{n+1}$ by
+        \begin{align*}
+            F(\vec{x}, t) &= \VEC{-c_0^2 u_t \grad u}{\frac{1}{2}\qty(u_t^2 + c_0^2\left|\grad u\right|^2)} \\
+            \implies \grad \cdot F &= \qty(-c_0^2 u_t \grad u)_{\vec{x}} + \frac{1}{2}\qty(u_t + c_0^2 + \left|\grad u\right|^2)_t \\
+            &= \grad\qty(-c_0^2 u_t \grad u) + \frac{1}{2}\qty(u_t + c_0^2 + \left|\grad u\right|^2)_t
+        \end{align*}
+        For ease, denote $\Omega_{T, t}$ to be the truncated cone, i.e.
+        \begin{align*}
+            \Omega_{T, t} = \left\{(x, t') \in \Omega_T\ :\ 0 < t' < t\right\}
+        \end{align*}
+        and denote the curved ``side'' part of the boundary of the cone as
+        \begin{align*}
+            \partial\Omega_{T, t, \text{side}} = \left\{x \in \partial\Omega_{T, t}\ :\ \vec{n} \neq (0, 1) \text{ or } \vec{n} \neq (0, -1) \right\}
+        \end{align*}
+        Thus by the divergence theorem,
+        \begin{align*}
+            0 &= \int_{\Omega_{T, t}} \grad \cdot F \dd V \\
+            &= \int_{\partial \Omega_{T, t}} F \cdot \vec{n} \dd s \\
+            &= \int_{B(T)} F \cdot \VEC{0}{-1} \dd s + \int_{B(T-t)} F \cdot \VEC{0}{1} \dd s + \int_{\partial \Omega_{T, t, \text{side}}} F \cdot \frac{\VEC{\hat{x}}{c_0}}{\sqrt{1 + c_0^2}}\dd s\\
+            &= -e_T(0) + e_T(t) + \int_{\partial \Omega_{T, t, \text{side}}} \qty[\cancelto{0}{-\frac{c_0^2 u_t \grad u \hat{x}}{\sqrt{1 + c_0^2}}} + \frac{\frac{1}{2}\qty(u_t^2 + c_0^2\left|\grad u\right|^2)c_0}{\sqrt{1 + c_0^2}}]\dd s
+        \end{align*}
+        Since the integrand is always positive, then
+        \begin{align*}
+            0 \leq e_T(t) \leq e_T(0)
+        \end{align*}
+    \item
+        \emph{Suppose that $u_1, u_2$ are smooth solutions of the wave equation such that $$u_i(x,0) = f_i(x), \qquad u_{it}(x,0) = g_i(x), \qquad i = 1, 2$$ where $f_i = g_i$ in $|x| \leq c_0 T$.  Show that $u_1 = u_2 \in \Omega_T$.}
+
+        \emph{HINT.  Consider $u = u_1 - u_2$.} \\
+
+        Let $u = u_1 - u_2$.  Then since $u$ is a linear combination of solutions of the wave equation then $u$ is a solution of the wave equation.  Then note $u(x,0) = u_1(x,0) - u_2(x,0) = 0$ and $u_t(x,0) = u_{1t}(x,0) - u_{2t}(x,0) = 0$.  Also, since $u$ is sufficiently smooth, then
+        \begin{align*}
+            (\grad u)(x,0) = \grad(u(x,0)) = \grad 0 = 0
+        \end{align*}
+        for all $x$.  Then fix $t \in [0, T]$ and note that by part \textbf{(b)},
+        \begin{align*}
+            0 \leq e_T(t) \leq e_T(0) = \int_{B(T)}\qty[u_t^2(x,0) + c_0^2|\grad u(x,0)|^2]\dd x
+        \end{align*}
+        However, initial conditions $u_t(x,0) = \grad u(x,0) = 0$, and so
+        \begin{align*}
+            0 \leq e_T(t) \leq \int_B(T) \qty[\cancelto{0}{u_t^2(x,0)} + c_0^2\cancelto{0}{|\grad u (x,0)|^2}] = 0 \\
+            \implies e_T(t) = 0 \qquad \forall t \in [0,T].
+        \end{align*}
+        Since $u_t^2 \geq 0$ and $|\grad u|^2 \geq 0$, then $u_t = 0$ and $\grad u = 0$ for all $t \in [0, T]$.  This shows $u$ is constant, i.e.
+        \begin{align*}
+            u(x,t) = K \in \mathbb{R}
+        \end{align*}
+        but $u(x,0) = 0 \implies K = 0$, i.e.~$u \equiv 0$, or
+        \begin{align*}
+            u_1 = u_2.
+        \end{align*}
+\end{enumerate}

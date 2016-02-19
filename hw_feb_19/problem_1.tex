@@ -1,0 +1,67 @@
+\problem{Problem 1}
+\emph{Suppose that $p\ :\ [a,b]\rightarrow \Rl$ is a continuously differentiable function such that $p > 0$ and $q,r\ :\ [a,b]$ are continuous functions such that $r > 0$, $q \geq 0$.  Define a weighted inner product on $L^2(a,b)$ by $$\VEC{u}{v}_r = \int_a^b r(x) \overline{u(x)}v(x) \dd x.$$  Let $A\ :\ D(A) \subset L^2(a,b) \rightarrow L^2(a,b)$ by $$A = \frac{1}{r(x)}\qty[-\frac{\dd}{\dd x}p(x) \frac{\dd}{\dd x} + q(x)]$$ with Dirichlet boundary conditions and domain $$D(A) = \left\{u \in H^2(a,b)\ :\ u(a) = 0 = u(b)\right\}.$$}
+\begin{enumerate}[\bf (a)]
+    \item
+        \emph{Show that $$\VEC{u}{Av}_r = \VEC{Au}{v}_r \qquad \text{for all } u, v \in D(A),$$ meaning that $A$ is self-adjoint with respect to $\VEC{\cdot}{\cdot}_r$.} \\
+
+        Denote the real and complex parts of a function $u$ by $u_r$ and $u_i$, respectively.  Then
+        \begin{align*}
+            \VEC{u}{Av}_r &= \int_a^b r\overline{u}\frac{1}{r}\qty[-(pv')' + qv]\dd x \\
+            &= \int_a^b ru_r\frac{1}{r}\qty[-(pv')' + qv]\dd x  - i\int_a^b ru_i\frac{1}{r}\qty[-(pv')' + qv]\dd x \\
+            &= \int_a^b u_r\qty[-(pv')' + qv]\dd x  - i\int_a^b u_i\qty[-(pv')' + qv]\dd x
+        \end{align*}
+        By Homework 4 number 3,
+        \begin{align*}
+            \VEC{u}{Av}_r &= \qty[p\qty((u_r'v - u_rv') - i(u_i'v - u_iv'))]_a^b + \VEC{rAu_r}{v} - i\VEC{rAu_i}{v}
+        \end{align*}
+        where $\VEC{u}{v}$ is the unweighted innerproduct of $u$ and $v$.  The Dirichlet boundary condition $u(a) = u(b) = 0$ implies $u_r(a) = u_r(b) = u_i(a) = u_i(b) = 0$.  If we assume the adjoint boundary condition on $v$,
+        \begin{align*}
+            v_r(a) = v_r(b) = v_i(a) = v_i(b) = 0
+        \end{align*}
+        then
+        \begin{align*}
+            \VEC{u}{Av}_r = \VEC{rAu_r}{v} - i\VEC{rAu_i}{v} = \VEC{rAu}{v}
+        \end{align*}
+        since inner products are conjugate-linear in the first term.  However, since $r > 0$, then
+        \begin{align*}
+            \VEC{ru}{v} = \int_a^b\overline{ru}v\dd x = \int_a^b r\overline{u}v\dd x = \VEC{u}{v}_r
+        \end{align*}
+        which proves
+        \begin{align*}
+            \VEC{u}{Av}_r = \VEC{rAu}{v} = \VEC{Au}{v}_r
+        \end{align*}
+        Thus, $A$ is self-adjoint with respect to $\VEC{\cdot}{\cdot}_r$.
+    \item
+        \emph{Show that the eigenvalues $\lambda$ of the weighted Sturm-Liouville eigenvalue problem $$-\qty(pu')' + qu = \lambda r u, \qquad u(a) = 0 = u(b)$$ are real and positive and eigenfunctions associated with different eigenvalues are orthogonal with respect to $\VEC{\cdot}{\cdot}_r$.} \\
+
+        Eigenvalues $\lambda$ of $-\qty(pu')' + qu = \lambda r u$; $u(a) = 0 = u(b)$ are eigenvalues of
+        \begin{align*}
+            A u = \lambda u, \qquad u(a) = 0 = u(b)
+        \end{align*}
+        where $A$ is defined above.  We showed $A$ is self-adjoint with respect to $\VEC{\cdot}{\cdot}_r$ in part \textbf{(a)}.  Thus if $Au = \lambda u$,
+        \begin{align*}
+            \VEC{Au}{u}_r = \VEC{\lambda u}{u}_r = \overline{\lambda}\VEC{u}{u}_r \qquad \text{and} \qquad \VEC{u}{Au}_r = \VEC{u}{\lambda u}_r = \lambda\VEC{u}{u}_r
+        \end{align*}
+        Thus $\lambda = \overline{\lambda}$ or $u = 0$, i.e. $\lambda \in \Rl$ if $\lambda$ is an eigenvalue.  Note
+        \begin{align*}
+            \lambda = \frac{\VEC{u}{Au}_r}{\VEC{u}{u}_r}
+        \end{align*}
+        implies $\lambda > 0$ since $u \neq 0$ and inner-products are positive-definite.
+
+        Now consider eigenfunctions of $A$, $\phi_n$, $\phi_m$ with eigenvalues $\lambda_n$ and $\lambda_m$, respectively ($\lambda_n \neq \lambda_m$).  Then
+        \begin{align*}
+            A\phi_n = \lambda_n \phi_n \qquad \text{and} \qquad A\phi_m = \lambda_m \phi_m
+        \end{align*}
+        By multiplying the left equation by $\phi_m$ and the right equation by $\phi_n$, and subtracting the two equations, we see
+        \begin{align*}
+            \phi_m A\phi_n - \phi_n A\phi_m = \qty(\lambda_n - \lambda_m)\phi_n\phi_m \\
+            \implies \VEC{\phi_m}{A\phi_n}_r - \VEC{A\phi_m}{\phi_n}_r = \int_a^b \qty(\lambda_n - \lambda_m)\phi_n\phi_m \dd x
+        \end{align*}
+        Then since $A$ is self-adjoint,
+        \begin{align*}
+            0 = \frac{1}{r}0 = (\lambda_n - \lambda_m)\int_a^b \phi_n\phi_m \dd x \\
+            \implies 0 &= \int_a^b\phi_n\phi_mr \dd x \\
+            &= \VEC{\phi_n}{\phi_m}_r
+        \end{align*}
+        and thus $\phi_n$ and $\phi_m$ are orthogonal.
+\end{enumerate}

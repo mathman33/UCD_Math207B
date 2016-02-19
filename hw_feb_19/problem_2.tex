@@ -1,0 +1,40 @@
+\problem{Problem 2}
+\emph{A nonuniform string of length one with wave speed $c_0(x) = \sqrt{\dfrac{T}{\rho_0(x)}} > 0$ is fixed at each end, with zero initial displacement and nonzero initial velocity.  The transverse displaceent $y = u(x,t)$ of the string satisfies the IBVP}
+\begin{align*}
+    \begin{array}{lll}
+        u_{tt} = c_0^2(x)u_{xx}, & 0 < x < 1, & t > 0, \\
+        u(0, t) = 0, & u(1,t) = 0, & t > 0, \\
+        u(x,0) = 0, & 0 < x < 1, & \\
+        u_t(x,0) = g(x), & 0 < x < 1, &
+    \end{array}
+\end{align*}
+\emph{Find the solution in terms of the eigenvalues $\lambda_n$ and eigenfunctions $\phi_n(x)$ of the weighted Sturm-Liouville problem $$-c_0^2\phi_n'' = \lambda_n\phi_n, \qquad \phi_n(0) = 0, \qquad \phi_n(1) = 0, \qquad n = 1, 2, 3, \dots$$}
+
+Suppose $u(x,t) = F(x)G(t)$.  Then
+\begin{align*}
+    F(x)G''(t) &= c_0^2(x)F''(x)G(t) \\
+    \qty(\frac{G''}{G})(t) &= \qty(\frac{F''c_0^2}{F})(x) = -\lambda \in \Rl
+\end{align*}
+since the left hand side is a function of $t$ and the right hand side is a function of $x$.  Then
+\begin{align*}
+    -c_0^2(x)F''(x) = \lambda F(x)
+\end{align*}
+By Problem 1 ($p \equiv 1$, $q \equiv 0$, and $r \equiv \frac{1}{c_0^2}$) this implies the eigenfunctions $\phi_n(x)$ are orthogonal and its eigenvalues $\lambda_n$ are real and $\lambda_n > 0$ for all $n$.  Then
+\begin{align*}
+    G'' &= -\lambda G \qquad \lambda > 0 \\
+    \implies G(t) &= \sum_{n=1}^\infty \qty[a_n\cos\qty(\sqrt{\lambda_n}t) + b_n\sin\qty(\sqrt{\lambda_n}t)] \\
+    \implies u(x,t) &= \sum_{n=1}^\infty \left\{\qty[a_n\cos\qty(\sqrt{\lambda_n}t) + b_n\sin\qty(\sqrt{\lambda_n}t)]\phi_n(x)\right\} \\
+    \implies 0 = u(x,0) &= \sum_{n=1}^\infty \qty[a_n\phi_n(x)] \\
+    \implies a_n &= 0 \text{ for } n = 1, 2, \dots \qquad \text{because $\{\phi_n\}_n$ is a linearly independent set} \\
+    \implies u(x,t) &= \sum_{n=1}^\infty \left\{\qty[b_n\sin\qty(\sqrt{\lambda_n}t)]\phi_n(x)\right\} \\
+    \implies u_t(x,t) &= \sum_{n=1}^\infty \left\{\sqrt{\lambda_n}b_n\cos\qty(\sqrt{\lambda_n}t)\phi_n(x)\right\} \\
+    \implies g(x) = u_t(x,0) &= \sum_{n=1}^\infty \qty[\sqrt{\lambda_n}b_n\phi_n(x)]
+\end{align*}
+Thus the coefficients $\sqrt{\lambda_n}b_n$ are Fourier coefficients with respect to the weighted norm $\VEC{\cdot}{\cdot}_{c_0^2}$, i.e.
+\begin{align*}
+    \sqrt{\lambda_n}b_n = \VEC{g(x)}{\phi_n(x)}_{c_0^2(x)}
+\end{align*}
+So,
+\begin{align*}
+    u_t(x,t) &= \sum_{n=1}^\infty \left\{\VEC{g(x)}{\phi_n(x)}_{c_0^2(x)}\cos\qty(\sqrt{\lambda_n}t)\phi_n(x)\right\}
+\end{align*}
