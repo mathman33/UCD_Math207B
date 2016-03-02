@@ -1,0 +1,444 @@
+\documentclass{article} % A4 paper and 11pt font size
+\setcounter{secnumdepth}{0}
+
+\usepackage{amssymb, amsmath, amsfonts}
+\usepackage{moreverb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{graphics}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{color}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\usepackage{array}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage[makeroom]{cancel}
+\usepackage{bbold}
+\usepackage{alltt}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\usepackage{bigints}
+\allowdisplaybreaks
+\pgfplotsset{compat=1.12}
+
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}{Lemma}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\E}{\varepsilon}
+\def\Rl{\mathbb{R}}
+\def\Cx{\mathbb{C}}
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancy} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead[L]{\bf Sam Fleischer}
+\fancyhead[C]{\bf UC Davis \\ Applied Mathematics (MAT207B)} % No page header - if you want one, create it in the same way as the footers below
+\fancyhead[R]{\bf Winter 2016}
+
+\fancyfoot[L]{\bf } % Empty left footer
+\fancyfoot[C]{\bf \thepage} % Empty center footer
+\fancyfoot[R]{\bf } % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{25pt} % Customize the height of the header
+
+\newcommand{\problem}[1]{
+\vspace{.375cm}
+\begin{minipage}{\textwidth}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \section{\bf #1}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \vspace{0.25cm}
+\end{minipage}
+}
+
+\newcommand{\VEC}[2]{\left\langle #1, #2 \right\rangle}
+
+% \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{ 
+\normalfont \normalsize 
+\textsc{UC Davis, Applied Mathematics (MAT207B), Winter 2016} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{2pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Homework \#6 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{\huge Sam Fleischer} % Your name
+
+\date{March 4, 2016} % Today's date or a custom date
+
+\begin{document}\thispagestyle{empty}
+
+\maketitle % Print the title
+
+\makeatletter
+\@starttoc{toc}
+\makeatother
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 1}
+\emph{Suppose that $u_1, u_2 : \Rl \to \Rl$ are two solutions of the homogeneous Sturm-Liouville equation
+\[
+-(pu')' + q u = 0
+\]
+where $p, q: \Rl \to \Rl$ are smooth functions and $p>0$.
+If $W = u_1 u_2' - u_2 u_1'$
+is the Wronskian of $u_1$, $u_2$, show that
+$p W = \text{constant}$.} \\
+
+If $u_1, u_2$ are solutions of $-(pu')' + qu = 0$, then
+\begin{align*}
+    -(pu_1')' + qu_1 = 0 &\implies -\qty(p'u_2u_1' + pu_2u_1'') + qu_1u_2 = 0, \qquad \text{and}\\
+    -(pu_2')' + qu_2 = 0 &\implies -\qty(p'u_1u_2' + pu_1u_2'') + qu_2u_1 = 0, \\
+    &\implies p'u_1u_2' - p'u_2u_1' + pu_1u_2'' - pu_2u_1'' = 0 \\
+    &\implies \frac{\dd}{\dd x}\qty(pW) = 0 \\
+    &\implies pW = \text{constant}
+\end{align*}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 2}
+\emph{Compute the Green's function for the BVP
+\begin{align*}
+&-u'' + u = f(x)\qquad 0<x<1
+\\
+&u(0)=0,\qquad u(1)=0.
+\end{align*}
+Write down the integral representation of the solution $u$ in terms of $f$.} \\
+
+Assume the Green's function $G(x;\xi)$ is continuous, and solves $AG(x, \xi) = \delta(x - \xi)$ where $A = -\frac{\dd^2}{\dd x^2} + \text{Id}$.  Then the following four conditions must hold:
+\begin{enumerate}
+    \item Initial Value Problem: $-G_{xx} + G = 0$; $G(0, \xi) = 0$ for $x \in [0, \xi)$
+    \item Final Value Problem: $-G_{xx} + G = 0$; $G(1, \xi) = 0$ for $x \in (\xi, 1]$
+    \item Continuity: $G(\xi^- \xi) = G(\xi^+, \xi)$
+    \item Jump Condition: $-\qty[G_x]_{\xi^-}^{\xi^+} = 1$
+\end{enumerate}
+The solution to $-u'' + u = 0$ is $u(x) = Ae^x + Be^{-x}$.  If $u(0) = 0$, then $A = -B$, or $u(x) = A(e^x - e^{-x})$.  On the other hand, if $u(1) = 0$ (and $u(x) = Ce^x + De^{-x}$), then $D = -Ce^2$, or $u(x) = C\qty(e^x - e^{2 - x})$.  Thus, the first two conditions imply
+\begin{align*}
+    G(x;\xi) &= \begin{cases}
+        A(\xi)\qty(e^x - e^{-x}) & \text{ if } x \in [0, \xi) \\
+        C(\xi)\qty(e^x - e^{2-x}) & \text{ if } x \in (\xi, 1]
+    \end{cases} \\
+    \implies G_x(x;\xi) &= \begin{cases}
+        A(\xi)\qty(e^x + e^{-x}) & \text{ if } x \in [0, \xi) \\
+        C(\xi)\qty(e^x + e^{2-x}) & \text{ if } x \in (\xi, 1]
+    \end{cases}
+\end{align*}
+Continuity of $G$ implies
+\begin{align*}
+    A(\xi)\qty(e^\xi - e^{-\xi}) &= C(\xi)\qty(e^\xi - e^{2 - \xi}) \\
+    \implies A(\xi) = C(\xi)\qty[\frac{e^\xi - e^{2 -\xi}}{e^\xi - e^{-\xi}}]
+\end{align*}
+The jump condition implies
+\begin{align*}
+    C(\xi)\qty[\frac{2(1 - e^2)}{2^\xi - e^{-\xi}}] &= -1 \qquad \implies \qquad C(\xi) = \frac{e^\xi - e^{-\xi}}{2(e^2 - 1)} \qquad \implies \qquad A(\xi) = \frac{e^\xi - e^{2-\xi}}{2(e^2 - 1)}
+\end{align*}
+This shows
+\begin{align*}
+    G(x;\xi) = \begin{cases}
+        \dfrac{e^\xi - e^{2-\xi}}{2(e^2 - 1)}\qty(e^x - e^{-x}) & \text{ if } x \in [0, \xi) \\[.3cm]
+        \dfrac{e^\xi - e^{-\xi}}{2(e^2 - 1)}\qty(e^x - e^{2-x}) & \text{ if } x \in (\xi, 1]
+    \end{cases}
+\end{align*}
+Note $G(x;\xi) = G(\xi;x)$.  Then the general solution to $-u''(x) + u(x) = f(x)$ is
+\begin{align*}
+    u(x) = \int_0^1 G(x;\xi)f(\xi)\dd \xi
+\end{align*}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 3}
+\emph{Compute the Green's function for the BVP
+\begin{align*}
+&-u'' = f(x)\qquad 0<x<1
+\\
+&u(0)+u(1)=0,\qquad u'(0)+u'(1)=0.
+\end{align*}
+Write down the integral representation of the solution $u$ in terms of $f$.} \\
+
+First note the homogeneous problem is not singular since a linear function $u(x) = a + bx$ would solve $-u'' = 0$, but $u(0) + u(1) = 0 = u'(0) + u'(1)$ implies $a = b = 0$.  Since $\{1, x\}$ form a fundamental set of solutions for the homogeneous problem on $[0, \xi)$ and $(\xi, 1]$, then let $G$ be the Green's function that solves $-G(x;\xi) = \delta(x - \xi)$:
+\begin{align*}
+    G(x;\xi) &= \begin{cases}
+        A_1(\xi) + A_2(\xi)x & \text{ if } x \in [0, \xi) \\
+        B_1(\xi) + B_2(\xi)x & \text{ if } x \in (\xi, 1]
+    \end{cases} \\
+    \implies G_x(x;\xi) &= \begin{cases}
+        A_2(\xi) & \text{ if } x \in [0, \xi) \\
+        B_2(\xi) & \text{ if } x \in (\xi, 1]
+    \end{cases}
+\end{align*}
+The boundary condition $u'(0) = -u'(1)$ implies $G_x(0, \xi) = -G_x(1, \xi)$, or $A_2(\xi) = -B_2(\xi)$, and thus
+\begin{align*}
+    G(x;\xi) &= \begin{cases}
+        A_1(\xi) + A_2(\xi)x & \text{ if } x \in [0, \xi) \\
+        B_1(\xi) - A_2(\xi)x & \text{ if } x \in (\xi, 1]
+    \end{cases} \\
+    \implies G_x(x;\xi) &= \begin{cases}
+        A_2(\xi) & \text{ if } x \in [0, \xi) \\
+        -A_2(\xi) & \text{ if } x \in (\xi, 1]
+    \end{cases}
+\end{align*}
+Continuity of $G$ implies
+\begin{align*}
+    A_1(\xi) + A_2(\xi)\xi &= B_1(\xi) - A_2(\xi)\xi
+\end{align*}
+and the jump condition $-[G_x]_{\xi^-}^{\xi^+} = 1$ implies
+\begin{align*}
+    -\Big[-A_2(\xi) - A_2(\xi)\Big] = 1 \qquad \implies \qquad A_2(\xi) = \frac{1}{2}
+\end{align*}
+and thus $A_1(\xi) = B_1(\xi) - \xi$, which shows
+\begin{align*}
+    G(x;\xi) &= \begin{cases}
+        B_1(\xi) - \xi + \frac{x}{2} & \text{ if } x \in [0, \xi) \\
+        B_1(\xi) - \frac{x}{2} & \text{ if } x \in (\xi, 1]
+    \end{cases}
+\end{align*}
+Then the boundary condition $u(0) = -u(1)$ implies $G(0, \xi) = -G(1, \xi)$, or $B_1(\xi) - \xi = -B_1(\xi) + \frac{1}{2}$, or $B_1(\xi) = \frac{\xi}{2} + \frac{1}{4}$.  This shows
+\begin{align*}
+    G(x;\xi) &= -\frac{1}{4} + \frac{1}{2}\begin{cases}
+        x - \xi & \text{ if } x \in [0, \xi) \\
+        \xi - x & \text{ if } x \in (\xi, 1]
+    \end{cases} = -\frac{1}{4} + \frac{1}{2}\Big(x_< - x_>\Big)
+\end{align*}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 4}
+\emph{Compute the generalized Green's function $G(x;\xi)$ for the BVP
+\begin{align*}
+&-u'' = \pi^2 u + f(x)\qquad 0<x<1
+\\
+&u(0) = 0,\qquad u(1)=0.
+\end{align*}
+State the equations that are satisfied by the function
+\[
+u(x) = \int_0^1 G(x;\xi) f(\xi)\, d\xi.
+\]}
+
+Define the differential operator $A = -\dfrac{\dd^2}{\dd x^2} - \pi^2$.  Then $A(\sqrt{2}\sin \pi x) = 0$, which shows $A$ is a singular operator for the homogeneous problem.  \emph{We use $\sqrt{2}\sin \pi x$ since $\norm{\sqrt{2}\sin\pi x}_{L^2} = 1$.}  This means we must orthogonally project the onto the kernel:
+\begin{align*}
+    \VEC{\sqrt{2}\sin\pi x}{f(x)} = \int_0^1 \sqrt{2}\sin\pi x f(x) \dd x = 0
+\end{align*}
+In other words, the solvability condition for the boundary value problem is $f \perp \sqrt{2}\sin \pi x$.  In this case, if $Av = f$ ($v$ is a solution to the nonhomogeneous problem), then $u = v + c\sqrt{2}\sin\pi x$ is a solution to the nonhomogeneous problem since
+\begin{align*}
+    Au = Av + Ac\sqrt{2}\sin \pi x = Av + 0 = Av = f
+\end{align*}
+Thus, consider $u \perp \sqrt{2}\sin \pi x$ and solve the nonsingular problem
+\begin{align*}
+    Au = f - 2\VEC{\sin\pi x}{f}\sin\pi x, \qquad u \perp \sqrt{2}\sin\pi x, \qquad u(0) = 0 = u(1)
+\end{align*}
+Suppose the Green's function $G(x;\xi)$ is the solution to the above boundary value problem for $f = \delta(x - \xi)$.  Then note that
+\begin{align*}
+    f(x) = 0\ \ \text{for} x \neq \xi \qquad \text{and} \qquad \VEC{\sin\pi x}{\delta(x-\xi)} = \int_0^1 \sin \pi x \delta(x - \xi)\dd x = \sin \pi \xi
+\end{align*}
+Then $G$ satisfies the following conditions:
+\begin{enumerate}
+    \item Initial Value Problem: $G_{xx} + \pi^2 G = 2\sin\pi\xi\sin\pi x$ for $x \in [0,\xi)$, $G(0,\xi) = 0$, $G_x(0, \xi) = h_0(\xi)$
+    \item Final Value Problem: $G_{xx} + \pi^2 G = 2\sin\pi\xi\sin\pi x$ for $x \in (\xi,\xi]$, $G(1,\xi) = 0$, $G_x(1, \xi) = h_1(\xi)$
+    \item Continuity: $G(\xi^-, \xi) = G(\xi^+, \xi)$
+    \item Orthogonality: $G \perp \sin \pi x$
+\end{enumerate}
+
+The homogeneous solution $u_h$ to $u'' + \pi^2 u = 0$ is given by
+\begin{align*}
+    u_h(x) = a\cos\pi x + b\sin\pi x
+\end{align*}
+and guess the particular solution $Y(x) = x\qty[c\sin\pi x + d\cos\pi x]$ to $u'' + \pi^2 u = \sin\pi x$.  Then
+\begin{align*}
+    Y'(x) &= x\pi\qty[c\cos\pi x - d\sin\pi x] + \qty[c\sin\pi x + d\cos\pi x] \\
+    Y''(x) &= -x\pi^2\qty[c\sin\pi x + d\cos\pi x] + 2\pi\qty[c\cos\pi x - d\sin\pi x] \\
+    \implies Y'' + \pi^2 Y &= 2\pi c\cos \pi x - 2\pi d\sin \pi x = \sin \pi x \\
+    \implies c &= 0 \implies d = -\frac{1}{2\pi}
+\end{align*}
+Thus, the particular solution $Y(x) = -\frac{x}{2\pi}\cos\pi x$ and the complete solution is
+\begin{align*}
+    u(x) = a\cos\pi x + b\sin \pi x - \frac{x}{2\pi}\cos\pi x
+\end{align*}
+The initial condition $u(0) = 0$ implies $a = 0$, and thus for $x \in [0,\xi)$,
+\begin{align*}
+    u(x) &= b\sin \pi x - \frac{x}{2\pi}\cos\pi x \\
+    \implies u'(x) &= b\pi\cos \pi x - \frac{1}{2\pi}\cos\pi x + \frac{x}{2}\sin\pi x
+\end{align*}
+The initial condition $u'(0) = h_0$ implies
+\begin{align*}
+    h_0 = b\pi - \frac{1}{2\pi} \qquad \implies \qquad b = \frac{2\pi h_0 - 1}{2\pi^2}
+\end{align*}
+which shows, for $x \in [0,\xi)$,
+\begin{align*}
+    u(x) &= \frac{2\pi h_0 - 1}{2\pi^2}\sin \pi x - \frac{x}{2\pi}\cos\pi x
+\end{align*}
+For $x \in (\xi,1]$, the final condition $u(1) = 0$ implies $a = \frac{1}{2\pi}$, and thus
+\begin{align*}
+    u(x) &= \frac{1}{2\pi}\cos \pi x + b\sin \pi x - \frac{x}{2\pi}\cos\pi x \\
+    \implies u'(x) &= -\frac{1}{2}\sin\pi x + b\pi\cos \pi x - \frac{1}{2\pi}\cos\pi x + \frac{x}{2}\sin\pi x
+\end{align*}
+The final condition $u'(1) = h_1$ implies
+\begin{align*}
+    h_1 = -b\pi + \frac{1}{2\pi} \qquad \implies \qquad b = \frac{1 - 2\pi h_1}{2\pi^2}
+\end{align*}
+which shows, for $x \in (\xi,1]$,
+\begin{align*}
+    u(x) &= \frac{1 - 2\pi h_1}{2\pi^2}\sin \pi x + \frac{1-x}{2\pi}\cos\pi x
+\end{align*}
+Thus $G$ is defined as
+\begin{align*}
+    G(x;\xi) = \frac{\sin\pi\xi}{\pi^2}\begin{cases}
+        (2\pi h_0 - 1)\sin \pi x - \pi x\cos\pi x & \text{ if } x \in [0,\xi) \\[.3cm]
+        (1 - 2\pi h_1)\sin \pi x + \pi(1-x)\cos\pi x & \text{ if } x \in (\xi,x]
+    \end{cases}
+\end{align*}
+Note the extra factor of $2\sin\pi\xi$, which is multiplied to the right hand side of the initial and final value problem.  To solve for $h_0$ and $h_1$ we impose continuity
+\begin{align*}
+    (2\pi h_0 - 1)\sin\pi \xi - \pi \xi\cos\pi \xi &= (1 - 2\pi h_1)\sin\pi \xi + \pi (1 - \xi)\cos\pi \xi \\
+    \implies (2\pi h_0 - 1)\sin\pi\xi &= (1 - 2\pi h_1)\sin\pi\xi + \pi\cos\pi\xi
+\end{align*}
+and orthogonality $\VEC{G}{\sin\pi x} = 0$
+\begin{align*}
+    \int_0^\xi \qty(2\pi h_0 - 1)\sin^2\pi x \dd x - \pi\int_0^\xi x\cos\pi x\sin\pi x\dd x + \int_\xi^1 (1 - 2\pi h_1)\sin^2\pi x \dd x + \pi\int_\xi^1 (1 - x)\cos\pi x\sin\pi x\dd x &= 0 \\
+    \qty(2\pi h_0 - 1)\int_0^\xi \sin^2\pi x \dd x + (1 - 2\pi h_1)\int_\xi^1 \sin^2\pi x \dd x - \cancelto{0}{\pi\int_0^1 x\cos\pi x\sin\pi x\dd x} + \pi\int_\xi^1\cos\pi x\sin\pi x\dd x &= 0 \\
+    (2\pi h_0 - 1)\qty(\frac{\xi}{2} - \frac{\sin 2\pi\xi}{4\pi}) + (1 - 2\pi h_1)\qty(\frac{1}{2} - \frac{\xi}{2} + \frac{\sin 2\pi\xi}{4\pi}) - \frac{1}{4}\Big[1 - \cos 2\pi \xi\Big] &= 0 \\
+    2\pi(h_0 + h_1)\qty(\frac{\xi}{2} - \frac{\sin 2\pi\xi}{4\pi}) - \pi h_1 + \frac{1}{4} - \xi + \frac{\sin 2\pi\xi}{2\pi} + \frac{\cos 2\pi\xi}{4} &= 0
+\end{align*}
+Continuity implies
+\begin{align*}
+    h_0 = \frac{1}{\pi} - h_1 + \frac{\cot \pi \xi}{2}
+\end{align*}
+Substituting this in to the orthogonality condition gives
+\begin{align*}
+    2\pi\xi\cot\pi\xi - 4\pi h_1 = 0 \qquad \implies \qquad h_1 = \frac{\xi\cot\pi\xi}{2} \qquad \implies \qquad h_0 = \frac{(1-\xi)\cot\pi\xi}{2}
+\end{align*}
+
+% \noindent 1) Consider $u_1(x)$ solution to the IVP
+% $$\begin{cases} u'' + \pi^2 u = \sin \pi x, & 0 \leq x < \xi \\
+%                 u(0)= 0, u'(0) = h_0(\xi). \end{cases}$$
+% The solution to the homogenous problem is obviously $$u_h(x) = a \cos \pi x + b \sin \pi x,$$
+% since $u_h''(x) = - \pi^2 u_h(x)$.  Then the solution to the particular problem must be 
+% $$u_p(x) = x\qty[A\sin \pi x + B \cos\pi x].$$
+% This gives $$u_p''(x) = x\qty[-A\pi^2 \sin \pi x - B \pi^2 \cos\pi x] + 2\qty[A \pi \cos \pi x - B \pi \sin \pi x],$$
+% so $$u_p''(x) + \pi^2 u_p(x) = 2\qty[A\pi \cos \pi x - B \pi \sin \pi x ] = \sin \pi x .$$
+% Hence $$A = 0, B = \dfrac{-1}{2\pi}.$$
+% So the general solution is  $$u(x) = a\cos \pi x + b \sin \pi x - \dfrac{x}{2\pi} \cos \pi x.$$
+% Imposing the boundary conditions,
+% $$u(0) = 0 = a + 0 + 0 \implies a =0,$$
+% $$u'(x) = b\pi \cos \pi x  + \dfrac{x}{2} \sin \pi x - \dfrac{1}{2 \pi} \cos \pi x$$
+% $$u'(0) = h_0(\xi) = b \pi + 0 - \dfrac{1}{2\pi} \implies b = \dfrac{2\pi h_0(\xi) + 1}{2\pi^2}.$$
+% Hence $$u_1(x) = \qty(\dfrac{2\pi h_0(\xi) + 1}{2\pi^2})\sin \pi x - \dfrac{x}{2\pi} \cos \pi x = \dfrac{1}{2\pi^2} \qty[ \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x].$$
+% So that on $0\leq x < \xi$, $$G(x;\xi) = 2\sin \pi \xi \ u_1(x) = \dfrac{\sin \pi \xi }{\pi^2} \qty[ \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x].$$
+                
+% \noindent 2) Consider $u_2(x)$ solution to the FVP
+% $$\begin{cases} u'' + \pi^2 u = \sin \pi x, & 0 \leq x < \xi \\
+%                 u(1)= 0, u'(1) = h_1(\xi). \end{cases}$$
+% The general solution is again $$u(x) = a\cos \pi x + b \sin \pi x - \dfrac{x}{2\pi} \cos \pi x,$$
+% so imposing the boundary conditions,
+% $$u(1) = 0 = -a + \dfrac{1}{2\pi} \implies a = \dfrac{1}{2\pi}.$$
+% $$u'(x) = a\pi\cos\pi x + \frac{x}{2}\sin\pi x - \frac{1}{2\pi}\cos\pi x - \frac{1}{2}\sin\pi x$$
+% $$u'(1) = h_1(\xi) = - b \pi + \dfrac{1}{2\pi} \implies b = \dfrac{1-2\pi h_1(\xi)}{2\pi^2}.$$
+% so that $$u_2(x) = \dfrac{1}{2\pi^2}\qty[ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x].$$
+% Then on $\xi < x \leq 1$, $$G(x;\xi) = 2\sin \pi \xi \ u_2(x) =\dfrac{\sin \pi \xi }{\pi^2} \qty[ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x].$$
+
+% So $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \cdot \begin{cases} \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x, & 0 \leq x < \xi \\ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x, & \xi < x \leq 1. \end{cases}$$
+
+% \noindent 3) We have by continuity of $G$ that 
+% \begin{align*}
+% G(\xi^-, \xi) &= G(\xi^+, \xi) \\
+% \implies \qty(2 \pi h_0(\xi) + 1 ) \sin \pi \xi - \pi \xi \cos \pi \xi &= \qty(1-2\pi h_1(\xi))\sin \pi \xi + \pi \qty(1-\xi) \cos \pi \xi \\
+% \implies 2 \pi h_0(\xi) \sin \pi \xi &= - 2 \pi h_1(\xi) \sin \pi \xi + \pi \cos \pi \xi \\
+% \implies h_0(\xi) &= \dfrac{- 2 \pi h_1(\xi) \sin \pi \xi + \pi \cos \pi \xi  }{2 \pi \sin \pi \xi} = \dfrac{1}{2} \cot \pi \xi - h_1(\xi).
+%  \end{align*}
+%  Thus $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \cdot \begin{cases} \qty(\pi \cot \pi \xi - 2\pi h_1(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x, & 0 \leq x < \xi \\ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x, & \xi < x \leq 1.  \end{cases}$$
+%  Rearranging, we have 
+%  $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x + \pi \cot\pi x_> \sin \pi x ].$$
+ 
+% \noindent 4) We need that $G(\cdot, \xi) \perp \sin \pi x$, so
+% $$\int_0^1 G(x, \xi) \sin \pi x \ \dd x = 0.$$
+% Hence $$\dfrac{\sin \pi \xi}{\pi^2} \qty( \int_0^1 \sin \pi x \qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x] \ \dd x + \int_0^1 \sin \pi x \qty[\pi \cot\pi x_> \sin \pi x ] \ \dd x ) = 0.$$
+%  The left integral becomes
+% \begin{align*}
+%  \int_0^1 \sin \pi x &\qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x] \ \dd x  \\
+% &= \int_0^1 \qty(1-2\pi h_1(\xi))\sin^2\pi x - \pi x \cos\pi x \sin \pi x \ \dd x \\
+% &=  \qty(1-2\pi h_1(\xi)) \frac{1}{2} \int_0^1 1 - \cos 2\pi x \ \dd x - \frac{1}{2}\qty[x\sin^2\pi x]_0^1 + \frac{1}{2}\int_0^1 \sin^2 \pi x \ \dd x \\
+% &= \qty(1- 2\pi h_1(\xi)) \frac{1}{2} - 0 + \frac{1}{4} \\
+% &= \frac{3}{4} - \pi h_1(\xi).
+% \end{align*}
+% The right integral becomes 
+% \begin{align*}
+% \int_0^1 \sin \pi x &\qty[\pi \cot\pi x_> \sin \pi x ] \ \dd x \\
+% &=  \int_0^\xi \pi \sin^2 \pi x \cot \pi \xi \ \dd x + \int_\xi^1 \pi \sin \pi x \cos \pi x \ \dd x \\
+% &= \pi \cot \pi \xi \qty[\frac{x}{2} - \frac{\sin 2\pi x}{4\pi} ]_0^\xi + \frac{1}{2}\qty[\sin^2 \pi x]_\xi^1 \\
+% &= \pi \cot \pi \xi \qty(\frac{\xi}{2} - \frac{\sin 2 \pi \xi}{4\pi}) -\frac{\sin^2 \pi \xi}{2}.
+% \end{align*}
+% So we have that 
+% $$\frac{\sin \pi \xi}{\pi^2} \qty(\frac{3}{4} - \pi h_1(\xi) + \pi \cot \pi \xi \qty(\frac{\xi}{2} - \frac{\sin 2 \pi \xi}{4\pi}) -\frac{\sin^2 \pi \xi}{2} ) = 0,$$
+% hence $$h_1(\xi) = \frac{3}{4\pi} + \cot \pi \xi \qty( \frac{\xi}{2} - \frac{\sin 2 \pi \xi}{2}) - \frac{\sin^2\pi \xi}{2\pi}.$$
+% Then $$h_0(\xi) = - \frac{3}{4\pi} + \frac{1}{2}\cot \pi \xi \qty(1- \xi + \sin 2 \pi \xi) + \frac{\sin^2\pi \xi}{2\pi}.$$
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 5}
+\emph{Consider the Sturm-Liouville equation
+\[
+-(pu')' + q u = \lambda r u,\qquad a<x<b
+\]
+where $p, q, r: [a,b] \to \Rl$ are smooth functions and $p(x), r(x) > 0$ for $a\le x\le b$.
+Show that the change of variables
+\[
+t = \int_a^x \sqrt{\frac{r(s)}{p(s)}}\, ds,\qquad v(t) = \left[r(x) p(x)\right]^{1/4} u(x)
+\]
+transforms this equation into a  Sturm-Liouville equation with $p=r=1$ of the form
+\[
+-v'' + Q v = \lambda v,\qquad 0<t<c.
+\]
+What are $c$ and $Q:[0,c]\to \Rl$?
+}
+
+
+
+
+
+
+\end{document}
