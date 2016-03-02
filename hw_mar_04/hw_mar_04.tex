@@ -238,7 +238,7 @@ Then the boundary condition $u(0) = -u(1)$ implies $G(0, \xi) = -G(1, \xi)$, or 
     G(x;\xi) &= -\frac{1}{4} + \frac{1}{2}\begin{cases}
         x - \xi & \text{ if } x \in [0, \xi) \\
         \xi - x & \text{ if } x \in (\xi, 1]
-    \end{cases} = -\frac{1}{4} + \frac{1}{2}\Big(x_< - x_>\Big)
+    \end{cases} = -\frac{1}{4} + \frac{1}{2}\big(x_< - x_>\big)
 \end{align*}
 
 
@@ -267,9 +267,10 @@ In other words, the solvability condition for the boundary value problem is $f \
     Au = Av + Ac\sqrt{2}\sin \pi x = Av + 0 = Av = f
 \end{align*}
 Thus, consider $u \perp \sqrt{2}\sin \pi x$ and solve the nonsingular problem
-\begin{align*}
+\begin{align}
+    \label{projected_problem}
     Au = f - 2\VEC{\sin\pi x}{f}\sin\pi x, \qquad u \perp \sqrt{2}\sin\pi x, \qquad u(0) = 0 = u(1)
-\end{align*}
+\end{align}
 Suppose the Green's function $G(x;\xi)$ is the solution to the above boundary value problem for $f = \delta(x - \xi)$.  Then note that
 \begin{align*}
     f(x) = 0\ \ \text{for} x \neq \xi \qquad \text{and} \qquad \VEC{\sin\pi x}{\delta(x-\xi)} = \int_0^1 \sin \pi x \delta(x - \xi)\dd x = \sin \pi \xi
@@ -350,72 +351,25 @@ Substituting this in to the orthogonality condition gives
 \begin{align*}
     2\pi\xi\cot\pi\xi - 4\pi h_1 = 0 \qquad \implies \qquad h_1 = \frac{\xi\cot\pi\xi}{2} \qquad \implies \qquad h_0 = \frac{(1-\xi)\cot\pi\xi}{2}
 \end{align*}
-
-% \noindent 1) Consider $u_1(x)$ solution to the IVP
-% $$\begin{cases} u'' + \pi^2 u = \sin \pi x, & 0 \leq x < \xi \\
-%                 u(0)= 0, u'(0) = h_0(\xi). \end{cases}$$
-% The solution to the homogenous problem is obviously $$u_h(x) = a \cos \pi x + b \sin \pi x,$$
-% since $u_h''(x) = - \pi^2 u_h(x)$.  Then the solution to the particular problem must be 
-% $$u_p(x) = x\qty[A\sin \pi x + B \cos\pi x].$$
-% This gives $$u_p''(x) = x\qty[-A\pi^2 \sin \pi x - B \pi^2 \cos\pi x] + 2\qty[A \pi \cos \pi x - B \pi \sin \pi x],$$
-% so $$u_p''(x) + \pi^2 u_p(x) = 2\qty[A\pi \cos \pi x - B \pi \sin \pi x ] = \sin \pi x .$$
-% Hence $$A = 0, B = \dfrac{-1}{2\pi}.$$
-% So the general solution is  $$u(x) = a\cos \pi x + b \sin \pi x - \dfrac{x}{2\pi} \cos \pi x.$$
-% Imposing the boundary conditions,
-% $$u(0) = 0 = a + 0 + 0 \implies a =0,$$
-% $$u'(x) = b\pi \cos \pi x  + \dfrac{x}{2} \sin \pi x - \dfrac{1}{2 \pi} \cos \pi x$$
-% $$u'(0) = h_0(\xi) = b \pi + 0 - \dfrac{1}{2\pi} \implies b = \dfrac{2\pi h_0(\xi) + 1}{2\pi^2}.$$
-% Hence $$u_1(x) = \qty(\dfrac{2\pi h_0(\xi) + 1}{2\pi^2})\sin \pi x - \dfrac{x}{2\pi} \cos \pi x = \dfrac{1}{2\pi^2} \qty[ \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x].$$
-% So that on $0\leq x < \xi$, $$G(x;\xi) = 2\sin \pi \xi \ u_1(x) = \dfrac{\sin \pi \xi }{\pi^2} \qty[ \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x].$$
-                
-% \noindent 2) Consider $u_2(x)$ solution to the FVP
-% $$\begin{cases} u'' + \pi^2 u = \sin \pi x, & 0 \leq x < \xi \\
-%                 u(1)= 0, u'(1) = h_1(\xi). \end{cases}$$
-% The general solution is again $$u(x) = a\cos \pi x + b \sin \pi x - \dfrac{x}{2\pi} \cos \pi x,$$
-% so imposing the boundary conditions,
-% $$u(1) = 0 = -a + \dfrac{1}{2\pi} \implies a = \dfrac{1}{2\pi}.$$
-% $$u'(x) = a\pi\cos\pi x + \frac{x}{2}\sin\pi x - \frac{1}{2\pi}\cos\pi x - \frac{1}{2}\sin\pi x$$
-% $$u'(1) = h_1(\xi) = - b \pi + \dfrac{1}{2\pi} \implies b = \dfrac{1-2\pi h_1(\xi)}{2\pi^2}.$$
-% so that $$u_2(x) = \dfrac{1}{2\pi^2}\qty[ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x].$$
-% Then on $\xi < x \leq 1$, $$G(x;\xi) = 2\sin \pi \xi \ u_2(x) =\dfrac{\sin \pi \xi }{\pi^2} \qty[ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x].$$
-
-% So $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \cdot \begin{cases} \qty(2 \pi h_0(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x, & 0 \leq x < \xi \\ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x, & \xi < x \leq 1. \end{cases}$$
-
-% \noindent 3) We have by continuity of $G$ that 
-% \begin{align*}
-% G(\xi^-, \xi) &= G(\xi^+, \xi) \\
-% \implies \qty(2 \pi h_0(\xi) + 1 ) \sin \pi \xi - \pi \xi \cos \pi \xi &= \qty(1-2\pi h_1(\xi))\sin \pi \xi + \pi \qty(1-\xi) \cos \pi \xi \\
-% \implies 2 \pi h_0(\xi) \sin \pi \xi &= - 2 \pi h_1(\xi) \sin \pi \xi + \pi \cos \pi \xi \\
-% \implies h_0(\xi) &= \dfrac{- 2 \pi h_1(\xi) \sin \pi \xi + \pi \cos \pi \xi  }{2 \pi \sin \pi \xi} = \dfrac{1}{2} \cot \pi \xi - h_1(\xi).
-%  \end{align*}
-%  Thus $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \cdot \begin{cases} \qty(\pi \cot \pi \xi - 2\pi h_1(\xi) + 1 ) \sin \pi x - \pi x \cos \pi x, & 0 \leq x < \xi \\ \qty(1-2\pi h_1(\xi))\sin \pi x + \pi \qty(1-x) \cos \pi x, & \xi < x \leq 1.  \end{cases}$$
-%  Rearranging, we have 
-%  $$G(x;\xi) = \dfrac{\sin \pi \xi}{\pi^2} \qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x + \pi \cot\pi x_> \sin \pi x ].$$
- 
-% \noindent 4) We need that $G(\cdot, \xi) \perp \sin \pi x$, so
-% $$\int_0^1 G(x, \xi) \sin \pi x \ \dd x = 0.$$
-% Hence $$\dfrac{\sin \pi \xi}{\pi^2} \qty( \int_0^1 \sin \pi x \qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x] \ \dd x + \int_0^1 \sin \pi x \qty[\pi \cot\pi x_> \sin \pi x ] \ \dd x ) = 0.$$
-%  The left integral becomes
-% \begin{align*}
-%  \int_0^1 \sin \pi x &\qty[ \qty(1-2\pi h_1(\xi))\sin\pi x - \pi x \cos\pi x] \ \dd x  \\
-% &= \int_0^1 \qty(1-2\pi h_1(\xi))\sin^2\pi x - \pi x \cos\pi x \sin \pi x \ \dd x \\
-% &=  \qty(1-2\pi h_1(\xi)) \frac{1}{2} \int_0^1 1 - \cos 2\pi x \ \dd x - \frac{1}{2}\qty[x\sin^2\pi x]_0^1 + \frac{1}{2}\int_0^1 \sin^2 \pi x \ \dd x \\
-% &= \qty(1- 2\pi h_1(\xi)) \frac{1}{2} - 0 + \frac{1}{4} \\
-% &= \frac{3}{4} - \pi h_1(\xi).
-% \end{align*}
-% The right integral becomes 
-% \begin{align*}
-% \int_0^1 \sin \pi x &\qty[\pi \cot\pi x_> \sin \pi x ] \ \dd x \\
-% &=  \int_0^\xi \pi \sin^2 \pi x \cot \pi \xi \ \dd x + \int_\xi^1 \pi \sin \pi x \cos \pi x \ \dd x \\
-% &= \pi \cot \pi \xi \qty[\frac{x}{2} - \frac{\sin 2\pi x}{4\pi} ]_0^\xi + \frac{1}{2}\qty[\sin^2 \pi x]_\xi^1 \\
-% &= \pi \cot \pi \xi \qty(\frac{\xi}{2} - \frac{\sin 2 \pi \xi}{4\pi}) -\frac{\sin^2 \pi \xi}{2}.
-% \end{align*}
-% So we have that 
-% $$\frac{\sin \pi \xi}{\pi^2} \qty(\frac{3}{4} - \pi h_1(\xi) + \pi \cot \pi \xi \qty(\frac{\xi}{2} - \frac{\sin 2 \pi \xi}{4\pi}) -\frac{\sin^2 \pi \xi}{2} ) = 0,$$
-% hence $$h_1(\xi) = \frac{3}{4\pi} + \cot \pi \xi \qty( \frac{\xi}{2} - \frac{\sin 2 \pi \xi}{2}) - \frac{\sin^2\pi \xi}{2\pi}.$$
-% Then $$h_0(\xi) = - \frac{3}{4\pi} + \frac{1}{2}\cot \pi \xi \qty(1- \xi + \sin 2 \pi \xi) + \frac{\sin^2\pi \xi}{2\pi}.$$
-
-
+Thus,
+\begin{align*}
+    G(x;\xi) &= \frac{\sin\pi\xi}{\pi^2}\begin{cases}
+        \qty(2\pi \dfrac{(1-\xi)\cot\pi\xi}{2} - 1)\sin \pi x - \pi x\cos\pi x & \text{ if } x \in [0,\xi) \\[.3cm]
+        \qty(1 - 2\pi \dfrac{\xi\cot\pi\xi}{2})\sin \pi x + \pi(1-x)\cos\pi x & \text{ if } x \in (\xi,x]
+    \end{cases} \\
+    &= \frac{1}{\pi^2}\begin{cases}
+        \pi(1 - \xi)\cos\pi\xi \sin\pi x  - \sin\pi\xi\sin\pi x - \pi x\sin\pi\xi\cos\pi x & \text{ if } x \in [0,\xi)\\
+        \pi(1 - x)\cos\pi x \sin\pi \xi  - \sin\pi x\sin\pi \xi - \pi \xi\sin\pi x\cos\pi \xi & \text{ if } x \in (\xi,1]
+    \end{cases}
+\end{align*}
+Clearly, $G(x;\xi) = G(\xi;x)$, so we can define $x_> = \max\{x, \xi\}$ and $x_< = \min\{x,\xi\}$ and write
+\begin{align*}
+    G(x;\xi) = \frac{1}{\pi^2}\Big[\pi(1 - x_>)\cos\pi x_> \sin\pi x_<  - \sin\pi x_>\sin\pi x_< - \pi x_<\sin\pi x_>\cos\pi x_<\Big]
+\end{align*}
+Then the solution to the projected problem (\ref{projected_problem}) is
+\begin{align*}
+    u(x) = \int_0^1 G(x;\xi)f(\xi)\dd \xi
+\end{align*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%

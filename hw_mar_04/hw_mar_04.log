@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  2 MAR 2016 00:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  2 MAR 2016 12:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2214,25 +2214,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 197--198
  []
 
 [3] [4] [5]
-Overfull \hbox (0.56535pt too wide) in paragraph at lines 344--344
+Overfull \hbox (0.56535pt too wide) in paragraph at lines 345--345
 [] 
  []
 
 [6] [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 444.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 444.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 398.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 398.
 (/Users/samuelfleischer/School/UCD/UCD_Math207B/hw_mar_04/hw_mar_04.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 444.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 444.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 398.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 398.
 Package rerunfilecheck Info: File `hw_mar_04.out' has not changed.
 (rerunfilecheck)             Checksum: AB1BBD3B1EFD461C9F7475483C3F79C7;225.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 444.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 398.
  ) 
 Here is how much of TeX's memory you used:
- 34341 strings out of 493089
- 778559 string characters out of 6134842
- 950815 words of memory out of 5000000
- 37228 multiletter control sequences out of 15000+600000
+ 34343 strings out of 493089
+ 778590 string characters out of 6134842
+ 951817 words of memory out of 5000000
+ 37229 multiletter control sequences out of 15000+600000
  107447 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,18n,83p,10464b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2246,10 +2246,10 @@ al/texlive/2015/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/local/texl
 ive/2015/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/local/texlive/201
 5/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb>
 Output written on /Users/samuelfleischer/School/UCD/UCD_Math207B/hw_mar_04/hw_m
-ar_04.pdf (7 pages, 87629 bytes).
+ar_04.pdf (7 pages, 88715 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 500000)
+ 115 PDF objects out of 1000 (max. 8388607)
+ 97 compressed objects within 1 object stream
+ 22 named destinations out of 1000 (max. 500000)
  53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
