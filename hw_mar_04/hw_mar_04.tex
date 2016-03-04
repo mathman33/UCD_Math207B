@@ -388,9 +388,45 @@ transforms this equation into a  Sturm-Liouville equation with $p=r=1$ of the fo
 -v'' + Q v = \lambda v,\qquad 0<t<c.
 \]
 What are $c$ and $Q:[0,c]\to \Rl$?
-}
+}\\
 
-
+First note that $u = v(rp)^{-1/4}$ and that
+\begin{align*}
+    \frac{\dd t}{\dd x} = \sqrt{\frac{r(x)}{p(x)}}
+\end{align*}
+Then
+\begin{align*}
+    \frac{\dd}{\dd x} v = \frac{\dd t}{\dd x} \frac{\dd}{\dd t} v = \sqrt{\frac{r}{p}}v' \qquad \implies \qquad \frac{\dd}{\dd x} v' = \frac{\dd t}{\dd x}\frac{\dd}{\dd t}v' = \sqrt{\frac{r}{p}}v''
+\end{align*}
+Thus,
+\begin{align*}
+    \frac{\dd}{\dd x}u &= \frac{\dd}{\dd x} \qty[v(rp)^{-1/4}] = \sqrt{\frac{r}{p}}v'(rp)^{-1/4} + v\qty(-\frac{1}{4}(rp)^{-5/4}(rp)') = v'r^{1/4}p^{-3/4} - \frac{1}{4}v(rp)'(rp)^{-5/4} \\
+    \implies p\frac{\dd}{\dd x}u &= v'(rp)^{1/4} - \frac{1}{4}v(rp)'r^{-5/4}p^{-1/4} \\
+    \implies \frac{\dd}{\dd x}\qty[p\frac{\dd}{\dd x}u] &= \sqrt{\frac{r}{p}}v''(rp)^{1/4} + \frac{1}{4}v'(rp)^{-3/4}(rp)' - \frac{1}{4}\Bigg\{v(rp)'r^{5/4}\frac{-1}{4}p^{-5/4}p' + \Big[v(rp)'\frac{-5}{4}r^{-9/4}r' \\
+    & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad + \qty(v(rp)'' + \sqrt{\frac{r}{p}}v'(rp)')r^{-5/4}\Big]p^{-1/4}\Bigg\} \\
+    &= v''\qty[r^{3/4}p^{-1/4}] + v\qty[\frac{1}{16}(rp)'p'r^{5/4}p^{-5/4} + \frac{5}{16}(rp)'r'r^{-9/4}p^{-1/4} - \frac{1}{4}(rp)''r^{-5/4}p^{-1/4}] \\
+    \implies -\qty(r^{-3/4}p^{1/4})(pu')' &= -v'' - v\qty[\frac{1}{16}(rp)'p'r^{1/2}p^{-1} + \frac{5}{16}(rp)'r'r^{-3} - \frac{1}{4}(rp)''r^{-2}]
+\end{align*}
+Also,
+\begin{align*}
+    \qty(r^{-3/4}p^{1/4})qu = \qty(r^{-3/4}p^{1/4})qvr^{-1/4}p^{-1/4} = qvr^{-1}
+\end{align*}
+and
+\begin{align*}
+    \qty(r^{-3/4}p^{1/4})\lambda r u = \qty(r^{1/4}p^{1/4})\lambda v r^{-1/4}p^{-1/4} = \lambda v
+\end{align*}
+Thus,
+\begin{align*}
+    -v'' + Qv = \lambda v
+\end{align*}
+where
+\begin{align*}
+    \boxed{Q = -\qty[\frac{1}{16}(rp)'p'r^{1/2}p^{-1} + \frac{5}{16}(rp)'r'r^{-3} - \frac{1}{4}(rp)''r^{-2} + qr^{-1}]}
+\end{align*}
+Finally, when $x = b$,
+\begin{align*}
+    \boxed{c = \int_a^b\sqrt{\frac{r(s)}{p(s)}}\dd s}
+\end{align*}
 
 
 
