@@ -1,0 +1,163 @@
+\documentclass{article} % A4 paper and 11pt font size
+\setcounter{secnumdepth}{0}
+
+\usepackage{amssymb, amsmath, amsfonts}
+\usepackage{moreverb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{graphics}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{color}
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\usepackage{array}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage[makeroom]{cancel}
+\usepackage{bbold}
+\usepackage{alltt}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usepackage{pgfplots}
+\usepackage{bigints}
+\allowdisplaybreaks
+\pgfplotsset{compat=1.12}
+
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem{lemma}{Lemma}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\E}{\varepsilon}
+\def\Rl{\mathbb{R}}
+\def\Cx{\mathbb{C}}
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancy} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead[L]{\bf Sam Fleischer}
+\fancyhead[C]{\bf UC Davis \\ Applied Mathematics (MAT207B)} % No page header - if you want one, create it in the same way as the footers below
+\fancyhead[R]{\bf Winter 2016}
+
+\fancyfoot[L]{\bf } % Empty left footer
+\fancyfoot[C]{\bf \thepage} % Empty center footer
+\fancyfoot[R]{\bf } % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{25pt} % Customize the height of the header
+
+\newcommand{\problem}[1]{
+\vspace{.375cm}
+\begin{minipage}{\textwidth}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \section{\bf #1}
+    \begin{center}
+        \noindent\rule{5cm}{1pt}
+    \end{center}
+    \vspace{0.25cm}
+\end{minipage}
+}
+
+\newcommand{\VEC}[2]{\left\langle #1, #2 \right\rangle}
+
+% \numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+% \numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{ 
+\normalfont \normalsize 
+\textsc{UC Davis, Applied Mathematics (MAT207B), Winter 2016} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{2pt} \\[0.4cm] % Thin top horizontal rule
+\Huge Homework \#7 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{\huge Sam Fleischer} % Your name
+
+\date{March 18, 2016} % Today's date or a custom date
+
+\begin{document}\thispagestyle{empty}
+
+\maketitle % Print the title
+
+\makeatletter
+\@starttoc{toc}
+\makeatother
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 1}
+\begin{enumerate}[\it (a)]
+    \item
+        \emph{Use separation of variables to find the eigenvalues $\lambda$ and eigenfunctions $u(x,y)$ of the Dirichlet Laplacian on the unit square that satisfy}
+        \begin{align*}
+            -\qty(u_{xx} + u_{yy}) = \lambda u \qquad 0 < x < 1,\ 0 < y < 1 \\
+            u(x,0) = 0,\qquad u(x,1) = 0 \qquad 0 \leq x \leq 1 \\
+            u(0,y) = 0,\qquad u(1,y) = 0 \qquad 0 \leq y \leq 1.
+        \end{align*}
+    \item
+        \emph{What is the smallest eigenvalue that is not a simple eigenvale?}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem{Problem 2}
+\begin{enumerate}[\it (a)]
+    \item
+        \emph{Let $\vec{x} = (x,y)$, $\vec{\xi} = (\xi, \eta)$, and $\vec{\xi^*} = (\xi, -\eta)$ where $\eta > 0$.  Show that $$G\qty(\vec{x}, \vec{\xi}) = - \frac{1}{2\pi}\log\qty(\frac{\left|\vec{x} - \vec{\xi}\right|}{\left|\vec{x} - \vec{\xi^*}\right|})$$ is the solution of}
+        \begin{align*}
+            -\qty(G_{xx} + G_{yy}) = \delta\qty(\vec{x} - \vec{\xi}) \qquad \text{ in } - \infty < x < \infty, \qquad y > 0 \\
+            G\qty(\vec{x}, \vec{\xi}) = 0 \qquad\qquad\qquad \text{ on } y = 0.
+        \end{align*}
+    \item
+        \emph{Write down the Green's function representation for the solution $u(x,y)$ of the Dirichlet problem for the Laplacian in the upper half plane}
+        \begin{align*}
+            u_{xx} + u_{yy} = 0 \qquad \text{ in } -\infty < x < \infty, \qquad y > 0 \\
+            u(x,0) = f(x).
+        \end{align*}
+        \emph{You can assume that $u(x,y) \rightarrow 0$ sufficiently rapidly as $|(x,y)| \rightarrow \infty$.}
+    \item
+        \emph{Use the Green's function representation to show that $$u)x,y) = \frac{y}{\pi}\int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + y^2}\dd t.$$}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
