@@ -117,8 +117,49 @@
             u(x,0) = 0,\qquad u(x,1) = 0 \qquad 0 \leq x \leq 1 \\
             u(0,y) = 0,\qquad u(1,y) = 0 \qquad 0 \leq y \leq 1.
         \end{align*}
+
+        Suppose $u(x,y) = F(x)G(y)$.  Then
+        \begin{align*}
+            -F''G - FG'' = \lambda FG \qquad \implies \qquad -F''G = F\qty(G'' + \lambda G) \\
+            \implies -\frac{F''}{F} = \frac{G''}{G} + \lambda
+        \end{align*}
+        Since the left hand side is a function of $x$ and the right hand side is a function of $y$, then they can only be equal if
+        \begin{align*}
+            -\frac{F''}{F} = \frac{G''}{G} + \lambda = \mu
+        \end{align*}
+        where $\mu$ is a constant.  Note the boundary conditions imply
+        \begin{align*}
+            F(0) = F(1) = G(0) = G(1) = 0
+        \end{align*}
+        thus $F'' + \mu F = 0$ and the homogeneous Dirichlet boundary conditions imply $\mu < 0$ and
+        \begin{align*}
+            F(x) = A\sin(\sqrt{-\mu}x)
+        \end{align*}
+        The condition $F(1) = 0$ implies
+        \begin{align*}
+            0 = A\sin(\sqrt{-\mu}) \qquad \implies \qquad \mu = -\pi^2 n^2
+        \end{align*}
+        for $n \geq 1$.  Then $G'' + (\lambda - \mu)G = 0$ and the homogeneous Dirichlet boundary conditions imply $\mu - \lambda > 0$ and
+        \begin{align*}
+            G(y) = B\sin(\sqrt{\mu - \lambda}y)
+        \end{align*}
+        The condition $G(1) = 0$ implies
+        \begin{align*}
+            0 = B\sin(\sqrt{\mu - \lambda}) \qquad \implies \qquad \lambda - \mu = -\pi^2 m^2 \qquad \implies \qquad \lambda = -\pi^2(n^2 + m^2)
+        \end{align*}
+        for $n, m \geq 1$.  Thus the solution to $-(u_{xx} + u_{yy}) = \lambda u$ is
+        \begin{align*}
+            \sum_{n,m \geq 1} A_{n,m}\sin(n\pi x)\sin(m\pi y)
+        \end{align*}
+        for some constants $A_{n,m}$.  Then the eigenvalues of
+        \begin{align*}
+            \laplacian u = \lambda u; \qquad u(x,0) = u(x,1) = u(0,y) = u(1,y) 0
+        \end{align*}
+        are $\lambda = \pi^2(m^2 + n^2)$ for all $n,m \geq 1$.
     \item
-        \emph{What is the smallest eigenvalue that is not a simple eigenvale?}
+        \emph{What is the smallest eigenvalue that is not a simple eigenvalue?} \\
+
+        The smallest eigenvalue that is not a simple eigenvalue is $5\pi^2$ since this can be acheived when $n = 1$, $m = 2$ or when $n = 2$, $m = 1$.  The only smaller eigenvalue is $2\pi^2$, but that is simple since it can only be acheived when $n = m = 1$.
 \end{enumerate}
 
 
@@ -146,7 +187,7 @@
         \end{align*}
         \emph{You can assume that $u(x,y) \rightarrow 0$ sufficiently rapidly as $|(x,y)| \rightarrow \infty$.}
     \item
-        \emph{Use the Green's function representation to show that $$u)x,y) = \frac{y}{\pi}\int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + y^2}\dd t.$$}
+        \emph{Use the Green's function representation to show that $$u(x,y) = \frac{y}{\pi}\int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + y^2}\dd t.$$}
 \end{enumerate}
 
 
