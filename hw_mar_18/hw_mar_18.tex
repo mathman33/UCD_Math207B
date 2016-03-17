@@ -131,21 +131,21 @@
         \begin{align*}
             F(0) = F(1) = G(0) = G(1) = 0
         \end{align*}
-        thus $F'' + \mu F = 0$ and the homogeneous Dirichlet boundary conditions imply $\mu < 0$ and
+        thus $F'' + \mu F = 0$ and the homogeneous Dirichlet boundary conditions imply $\mu > 0$ and
         \begin{align*}
-            F(x) = A\sin(\sqrt{-\mu}x)
+            F(x) = A\sin(\sqrt{\mu}x)
         \end{align*}
         The condition $F(1) = 0$ implies
         \begin{align*}
-            0 = A\sin(\sqrt{-\mu}) \qquad \implies \qquad \mu = -\pi^2 n^2
+            0 = A\sin(\sqrt{\mu}) \qquad \implies \qquad \mu = \pi^2 n^2
         \end{align*}
-        for $n \geq 1$.  Then $G'' + (\lambda - \mu)G = 0$ and the homogeneous Dirichlet boundary conditions imply $\mu - \lambda > 0$ and
+        for $n \geq 1$.  Then $G'' + (\lambda - \mu)G = 0$ and the homogeneous Dirichlet boundary conditions imply $\lambda - \mu > 0$ and
         \begin{align*}
-            G(y) = B\sin(\sqrt{\mu - \lambda}y)
+            G(y) = B\sin(\sqrt{\lambda - \mu}y)
         \end{align*}
         The condition $G(1) = 0$ implies
         \begin{align*}
-            0 = B\sin(\sqrt{\mu - \lambda}) \qquad \implies \qquad \lambda - \mu = -\pi^2 m^2 \qquad \implies \qquad \lambda = -\pi^2(n^2 + m^2)
+            0 = B\sin(\sqrt{\lambda - \mu}) \qquad \implies \qquad \lambda - \mu = \pi^2 m^2 \qquad \implies \qquad \lambda = \pi^2(n^2 + m^2)
         \end{align*}
         for $n, m \geq 1$.  Thus the solution to $-(u_{xx} + u_{yy}) = \lambda u$ is
         \begin{align*}
@@ -153,7 +153,7 @@
         \end{align*}
         for some constants $A_{n,m}$.  Then the eigenvalues of
         \begin{align*}
-            \laplacian u = \lambda u; \qquad u(x,0) = u(x,1) = u(0,y) = u(1,y) 0
+            -\laplacian u = \lambda u; \qquad u(x,0) = u(x,1) = u(0,y) = u(1,y) 0
         \end{align*}
         are $\lambda = \pi^2(m^2 + n^2)$ for all $n,m \geq 1$.
     \item
@@ -177,7 +177,29 @@
         \emph{Let $\vec{x} = (x,y)$, $\vec{\xi} = (\xi, \eta)$, and $\vec{\xi^*} = (\xi, -\eta)$ where $\eta > 0$.  Show that $$G\qty(\vec{x}, \vec{\xi}) = - \frac{1}{2\pi}\log\qty(\frac{\left|\vec{x} - \vec{\xi}\right|}{\left|\vec{x} - \vec{\xi^*}\right|})$$ is the solution of}
         \begin{align*}
             -\qty(G_{xx} + G_{yy}) = \delta\qty(\vec{x} - \vec{\xi}) \qquad \text{ in } - \infty < x < \infty, \qquad y > 0 \\
-            G\qty(\vec{x}, \vec{\xi}) = 0 \qquad\qquad\qquad \text{ on } y = 0.
+            G\qty(\vec{x}, \vec{\xi}) = 0 \qquad \text{ on } y = 0.
+        \end{align*}
+
+        \begin{align*}
+            -\laplacian G &= -\laplacian \qty[-\frac{1}{2\pi}\log\qty(\frac{\left|\vec{x} - \vec{\xi}\right|}{\left|\vec{x} - \vec{\xi^*}\right|})] \\
+            &= -\laplacian \qty[- \frac{1}{2\pi}\log\left|\vec{x} - \vec{\xi}\right| - \qty(-\frac{1}{2\pi}\log\left|\vec{x} - \vec{\xi^*}\right|)] \\
+            &= -\laplacian\qty[G_F\qty(\left|\vec{x} - \vec{\xi}\right|) - G_F\qty(\left|\vec{x} - \vec{\xi^*}\right|)]
+        \end{align*}
+        where
+        \begin{align*}
+            G_F(r) = -\frac{1}{2\pi}\log r
+        \end{align*}
+        is the free-space Green's function in two dimensions.  By definition,
+        \begin{align*}
+            -\laplacian G_F\qty(\left|\vec{x} - \vec{\xi}\right|) = \delta\qty(\vec{x} - \vec{\xi}) \qquad \text{and} \qquad -\laplacian G_F\qty(\left|\vec{x} - \vec{\xi^*}\right|) = \delta\qty(\vec{x} - \vec{\xi^*}).
+        \end{align*}
+        But $\delta\qty(\vec{x} - \vec{\xi^*}) = 0$ for $y > 0$ since $\xi^* = (\xi, -\eta)$ where $\eta > 0$.  Thus,
+        \begin{align*}
+            -\laplacian G &= -\laplacian G_F\qty(\left|\vec{x} - \vec{\xi}\right|) + \cancelto{0}{\laplacian G_F\qty(\left|\vec{x} - \vec{\xi^*}\right|)} = \delta\qty(\vec{x} - \vec{\xi}) \qquad \text{for } (x,y) \in \{(x,y)\ :\ y > 0\}
+        \end{align*}
+        When $y = 0$, $\left|\vec{x} - \vec{\xi}\right| = \left|\vec{x} - \vec{\xi^*}\right|$, thus
+        \begin{align*}
+            \frac{\left|\vec{x} - \vec{\xi}\right|}{\left|\vec{x} - \vec{\xi^*}\right|} = 1 \qquad \implies \qquad G\qty(\vec{x}, \vec{\xi}) = -\frac{1}{2\pi}\log(1) = 0
         \end{align*}
     \item
         \emph{Write down the Green's function representation for the solution $u(x,y)$ of the Dirichlet problem for the Laplacian in the upper half plane}
@@ -185,9 +207,47 @@
             u_{xx} + u_{yy} = 0 \qquad \text{ in } -\infty < x < \infty, \qquad y > 0 \\
             u(x,0) = f(x).
         \end{align*}
-        \emph{You can assume that $u(x,y) \rightarrow 0$ sufficiently rapidly as $|(x,y)| \rightarrow \infty$.}
+        \emph{You can assume that $u(x,y) \rightarrow 0$ sufficiently rapidly as $|(x,y)| \rightarrow \infty$.} \\
+
+        We utilize Green's identity
+        \begin{align*}
+            \int_\Omega \qty(u\laplacian v - v\laplacian u )\dd \vec{\xi} = \int_{\partial \Omega} \qty(u\frac{\partial v}{\partial n\qty(\vec{\xi})} - v\frac{\partial u}{\partial n\qty(\vec{\xi})})\dd s\qty(\vec{\xi})
+        \end{align*}
+        by setting $\Omega = \{(x,y)\ :\ y > 0\}$ and $v = G$ where $G$ is the free-space Green's function which solves $-\laplacian G = \delta(x)$.  Thus,
+        \begin{align*}
+            \int_\Omega \qty(u\laplacian G - G\laplacian u)\dd \vec{\xi} &= \int_{\partial\Omega}\qty(u\frac{\partial G}{\partial n\qty(\vec{\xi})} - G\frac{\partial u}{\partial n\qty(\vec{\xi})})\dd s\qty(\vec{\xi})
+        \end{align*}
+        However, $u$ is harmonic in $\Omega$, i.e.~$\laplacian u \equiv 0$ for $(x,y) \in \Omega$, and $-\laplacian G = \delta\qty(\vec{x} - \vec{\xi})$, i.e.
+        \begin{align*}
+            \int_\Omega \qty(u\laplacian G - \cancelto{0}{G\laplacian u})\dd \vec{\xi} = -\int_\Omega u\qty(\vec{\xi})\delta\qty(\vec{x} - \vec{\xi})\dd \vec{\xi} = -u\qty(\vec{x})
+        \end{align*}
+        Also, the Dirichlet condition $u\qty(\vec{x}) = f(x)$ on $\partial\Omega$ give us $G \equiv 0$ for $y = 0$ (i.e.~for $(x,y) \in \partial\Omega$).  Thus,
+        \begin{align*}
+            -u\qty(\vec{x}) = \int_{\partial\Omega}\qty(u\frac{\partial G}{\partial n\qty(\vec{\xi})} - \cancelto{0}{G\frac{\partial u}{\partial n\qty(\vec{\xi})}})\dd s\qty(\vec{\xi}) &= \int_{\partial\Omega} u\qty(\vec{\xi})\frac{\partial G\qty(x,y;\xi,\eta)}{\partial n\qty(\vec{\xi})}\dd s\qty(\vec{\xi})
+        \end{align*}
+        Finally, the unit normal vector on the boundary of $\Omega$ is $-\eta$, and thus
+        \begin{align*}
+            \boxed{u\qty(\vec{x}) = -\int_\Rl u\qty(\vec{\xi})\frac{\partial G\qty(x,y;\xi,\eta)}{\partial \eta} \dd \xi}
+        \end{align*}
     \item
         \emph{Use the Green's function representation to show that $$u(x,y) = \frac{y}{\pi}\int_{-\infty}^\infty \frac{f(t)}{(x-t)^2 + y^2}\dd t.$$}
+
+        Rewrite $G\qty(\vec{x}; \vec{\xi}) = G\qty(x,y;\xi,\eta)$.  Then
+        \begin{align*}
+            G\qty(\vec{x}, \vec{\xi}) &= \frac{1}{2\pi}\log\qty(\frac{\left|\vec{x} - \vec{\xi}\right|}{\left|\vec{x} - \vec{\xi^*}\right|}) = -\frac{1}{4\pi}\log\qty(\frac{(x - \xi)^2 + (y - \eta)^2}{(x - \xi)^2 + (y + \eta)^2}) \\
+            \implies \left.\frac{\partial G}{\partial \eta}\right|_{\eta = 0} &= \qty[-\frac{1}{4\pi}\cdot\frac{\qty[(x - \xi)^2 + (y + \eta)^2](-2)(y - \eta) - \qty[(x - \xi)^2 + (y - \eta)^2](2)(y + \eta)}{\qty((x - \xi)^2 + (y + \eta)^2)^2}]_{\eta = 0} \\
+            &= -\frac{1}{4\pi}\cdot\frac{\qty[(x - \xi)^2 + y^2](-2y) - \qty[(x - \xi)^2 + y^2](2y)}{\qty((x - \xi)^2 + y^2)^2} \\
+            &= -\frac{1}{4\pi}\cdot\frac{1}{\qty(x - \xi)^2 + y^2}\cdot(-4y) \\
+            &= \frac{y}{\pi}\frac{1}{\qty(x - \xi)^2 + y^2}
+        \end{align*}
+        Thus,
+        \begin{align*}
+            u(x,y) = u\qty(\vec{x}) = \int_\Rl u\qty(\vec{\xi})\frac{\partial G(x,y;\xi,\eta)}{\partial \eta}\dd \xi = \frac{y}{\pi}\int_\Rl \frac{u\qty(\vec{\xi})}{(x - \xi)^2 + y^2}\dd \xi
+        \end{align*}
+        Define $t \coloneqq \xi$ and note $u\qty(\vec{\xi}) = f\qty(\xi)$ when $\eta = 0$.  Thus,
+        \begin{align*}
+            \boxed{u(x,y) = \frac{y}{\pi}\int_\Rl \frac{f(t)}{(x-t)^2 + y^2}\dd t}
+        \end{align*}
 \end{enumerate}
 
 
