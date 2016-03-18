@@ -221,7 +221,7 @@
         \begin{align*}
             \int_\Omega \qty(u\laplacian G - \cancelto{0}{G\laplacian u})\dd \vec{\xi} = -\int_\Omega u\qty(\vec{\xi})\delta\qty(\vec{x} - \vec{\xi})\dd \vec{\xi} = -u\qty(\vec{x})
         \end{align*}
-        Also, the Dirichlet condition $u\qty(\vec{x}) = f(x)$ on $\partial\Omega$ give us $G \equiv 0$ for $y = 0$ (i.e.~for $(x,y) \in \partial\Omega$).  Thus,
+        Also, the Dirichlet condition $u\qty(\vec{x}) = f(x)$ on $\partial\Omega$ implies $G \equiv 0$ for $y = 0$ (i.e.~for $(x,y) \in \partial\Omega$).  Thus,
         \begin{align*}
             -u\qty(\vec{x}) = \int_{\partial\Omega}\qty(u\frac{\partial G}{\partial n\qty(\vec{\xi})} - \cancelto{0}{G\frac{\partial u}{\partial n\qty(\vec{\xi})}})\dd s\qty(\vec{\xi}) &= \int_{\partial\Omega} u\qty(\vec{\xi})\frac{\partial G\qty(x,y;\xi,\eta)}{\partial n\qty(\vec{\xi})}\dd s\qty(\vec{\xi})
         \end{align*}
